@@ -38,15 +38,6 @@ function NewFood() {
              .catch(err => {
                  console.log(err)
              })
-
-        console.log(foodName);
-        console.log(calories);
-        console.log(fat);
-        console.log(protein);
-        console.log(carbs);
-        console.log(sugar);
-        console.log(servingWeight);
-        console.log(userId);
     }
 
     return(
