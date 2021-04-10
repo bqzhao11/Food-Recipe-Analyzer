@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-
+import "axios"
+import axios from "axios";
 
 
 function NewFood() {
@@ -18,6 +19,26 @@ function NewFood() {
         if (foodName === "") {
             alert("Please enter a food name");
         }
+
+        const req = {
+            food_name: foodName,
+            calories: calories,
+            fat: fat,
+            protein: protein,
+            carbs: carbs,
+            sugar: sugar,
+            serving_weight: servingWeight,
+            user_id: userId
+        }
+        
+        axios.post('/foods/add', req)
+             .then(res => {
+                 console.log(res)
+             })
+             .catch(err => {
+                 console.log(err)
+             })
+
         console.log(foodName);
         console.log(calories);
         console.log(fat);
