@@ -21,3 +21,7 @@ def update_food_id(food_id):
 @app.route('/foods/delete/<int:food_id>')
 def delete_food_id(food_id):
     pass
+
+@app.route('/recipe/update/<string:recipe_name>')
+def update_recipe_name(new_recipe_name):
+    pass
