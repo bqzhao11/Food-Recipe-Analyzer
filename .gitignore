@@ -8,6 +8,9 @@
 # python virtual env
 /backend/recipe_app/
 
+# pycache
+__pycache__
+
 
 # testing
 /coverage
