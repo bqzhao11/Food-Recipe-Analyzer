@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Dashboard from "./components/dashboard";
 import Home from "./components/home";
@@ -13,7 +11,7 @@ function App() {
         <Router>
             <div>
                 {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+                renders the first one that matches the current URL. */}
                 <Switch>
                     <Route path="/login" component={Login} />
                     <Route path="/dashboard" component={Dashboard} />
