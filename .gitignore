@@ -5,6 +5,10 @@
 /.pnp
 .pnp.js
 
+# python virtual env
+/backend/recipe_app/
+
+
 # testing
 /coverage
 
