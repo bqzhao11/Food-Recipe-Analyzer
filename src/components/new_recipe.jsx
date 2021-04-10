@@ -32,18 +32,6 @@ function NewRecipe() {
         newrecipe_name: newRecipe
     };
 
-    axios.post('/recipe/add', req)
-             .then(res => {
-                 console.log(res)
-             })
-             .catch(err => {
-                 console.log(err)
-             })
-    
-    console.log(recipe);
-    console.log(newRecipe);
-    console.log(deleterecipe);
-    
     const handleSubmit = (evt) => {
         evt.preventDefault();
         if (recipe == '') {
@@ -51,6 +39,13 @@ function NewRecipe() {
         } else {
             alert(`Recipe ${recipe} was added!`);
         }
+        axios.post('/recipe/add/<int:recipe_id>', req)
+             .then(res => {
+                 console.log(res)
+             })
+             .catch(err => {
+                 console.log(err)
+             })
     }
 
     const handleUpdate = (evt) => {
@@ -61,7 +56,33 @@ function NewRecipe() {
         } else {
             alert(`Recipe '${oldRecipe}' was Updated To '${newRecipe}'!`);
         }
+        axios.post('/recipe/update/<int:recipe_id>', req)
+             .then(res => {
+                 console.log(res)
+             })
+             .catch(err => {
+                 console.log(err)
+             })
     }
+
+    const handleDelete = (e) => {
+        if (deleterecipe == '') {
+            alert('Please Enter A Recipe Name To Delete');
+        } else {
+            alert(`Recipe '${deleterecipe}' was Deleted!`);
+        }
+        axios.post('/recipe/delete/<int:recipe_id>', req)
+             .then(res => {
+                 console.log(res)
+             })
+             .catch(err => {
+                 console.log(err)
+             })
+    }
+
+    const handleDeleterecipe = event => {
+        setdeleterecipe(event.target.value);
+    };
 
     const handleChange = event => {
         setSearchTerm(event.target.value);
@@ -129,7 +150,7 @@ function NewRecipe() {
                     value = {oldRecipe}
                     onChange={handleOldrecipe}
                 />
-                <h5>Change to</h5>
+                <h6>Change to</h6>
                 <input
                     Type = "text"
                     name = "Title"
@@ -144,6 +165,24 @@ function NewRecipe() {
                 className="btn"
                 style={{ flex: "1" }}
                 />
+            </form>
+
+            <form onSubmit={handleDelete}>
+            <h4>Delete A Recipe From DataBase</h4>
+            <input
+                    Type = "text"
+                    name = "Title"
+                    style={{ flex: "10", padding: "5px" }}
+                    placeholder= "Recipe To Delete"
+                    value = {deleterecipe}
+                    onChange={handleDeleterecipe}
+                />
+                <input
+                type="submit"
+                value="Delete"
+                className="btn"
+                style={{ flex: "1" }}
+                />     
             </form>
             
         </div>
