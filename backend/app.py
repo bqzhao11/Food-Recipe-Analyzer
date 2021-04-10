@@ -41,6 +41,8 @@ def init_connection_engine():
 
 app = Flask(__name__)
 db = init_connection_engine()
+
+
 @app.route('/foods')
 def get_all_foods():
     pass
@@ -49,7 +51,20 @@ def get_all_foods():
 def add_food():
     data = request.get_json()
 
-    print(data)
+    try:
+        db.add_food(data)
+        result = {
+            'success': True,
+            'response': 'Food added'
+        }
+    except:
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
+
 
 @app.route('/foods/<string:food_name>')
 def get_food_name(food_name):
