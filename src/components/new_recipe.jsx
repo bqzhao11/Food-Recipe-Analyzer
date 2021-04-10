@@ -1,7 +1,8 @@
 import { render } from "@testing-library/react";
 import React from "react";
 import { useState } from "react";
-
+import "axios"
+import axios from "axios";
 
 var buttonStyle = {
   margin: '10px 10px 10px 0'
@@ -15,13 +16,33 @@ const people = [
     "Stake"
   ];
   
+  
 
 function NewRecipe() {
+
     const [recipe, setrecipeName] = useState("");
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = React.useState([]);
     const [oldRecipe, setoldRecipe] = useState("");
     const [newRecipe, setnewRecipe] = useState("");
+    const [deleterecipe, setdeleterecipe] = useState("");
+    
+    const req = {
+        recipe_name: recipe,
+        newrecipe_name: newRecipe
+    };
+
+    axios.post('/recipe/add', req)
+             .then(res => {
+                 console.log(res)
+             })
+             .catch(err => {
+                 console.log(err)
+             })
+    
+    console.log(recipe);
+    console.log(newRecipe);
+    console.log(deleterecipe);
     
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -128,5 +149,6 @@ function NewRecipe() {
         </div>
     );
 }
+
 
 export default NewRecipe;

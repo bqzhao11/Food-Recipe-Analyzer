@@ -62,3 +62,15 @@ def update_food_id(food_id):
 @app.route('/foods/delete/<int:food_id>')
 def delete_food_id(food_id):
     pass
+
+@app.route('/recipe/add')
+def add_recipe(recipe_name):
+    pass
+
+@app.route('/recipe/update')
+def update_recipe(newrecipe_name):
+    pass
+
+@app.route('/recipe/delete')
+def delete_recipe(deleterecipe):
+    pass
