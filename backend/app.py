@@ -1,10 +1,8 @@
 """Setup at app startup"""
 import os
 import sqlalchemy
-from flask import Flask
+from flask import Flask, request, jsonify
 from yaml import load, Loader
-
-
 
 def init_connection_engine():
     """ initialize database setup
@@ -21,7 +19,8 @@ def init_connection_engine():
             variables = load(open("app.yaml"), Loader=Loader)
         except OSError as e:
             print("Make sure you have the app.yaml file setup")
-            os.exit()
+            print(e)
+            os._exit()
 
         env_variables = variables['env_variables']
         for var in env_variables:
@@ -41,4 +40,25 @@ def init_connection_engine():
 
 
 app = Flask(__name__)
-db = init_connection_engine()
+# db = init_connection_engine()
+@app.route('/foods')
+def get_all_foods():
+    pass
+
+@app.route('/foods/add', methods=["POST"])
+def add_food():
+    data = request.get_json()
+
+    print(data)
+
+@app.route('/foods/<string:food_name>')
+def get_food_name(food_name):
+    pass
+
+@app.route('/foods/update/<int:food_id>')
+def update_food_id(food_id):
+    pass
+
+@app.route('/foods/delete/<int:food_id>')
+def delete_food_id(food_id):
+    pass
