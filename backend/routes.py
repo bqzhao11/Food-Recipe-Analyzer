@@ -27,7 +27,7 @@ def add_food():
     return jsonify(result)
 
 
-@app.route('/foods/<string:food_name>/<int:limit>')
+@app.route('/foods/<string:food_name>/<int:limit>', methods=['GET'])
 def get_food_name(food_name, limit):
 
     try:
@@ -45,13 +45,28 @@ def get_food_name(food_name, limit):
     
     return jsonify(result)
 
-@app.route('/foods/update/<int:food_id>')
+@app.route('/foods/update/<int:food_id>', methods=['POST'])
 def update_food_id(food_id):
     pass
 
-@app.route('/foods/delete/<int:food_id>')
+@app.route('/foods/delete/<int:food_id>', methods=['POST'])
 def delete_food_id(food_id):
-    pass
+    print(food_id)
+    print(type(food_id))
+    try:
+        db_helper.delete_food_id(food_id)
+        result = {
+            'success': True,
+            'response': f'Deleted {food_id} successfully'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
 
 
 @app.route('/recipe/add')
