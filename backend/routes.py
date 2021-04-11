@@ -1,0 +1,51 @@
+from flask import render_template, request, jsonify
+from backend import app
+from backend import database as db_helper
+
+
+@app.route('/foods')
+def get_all_foods():
+    pass
+
+@app.route('/foods/add', methods=["POST"])
+def add_food():
+    data = request.get_json()
+
+    try:
+        db_helper.add_food(data)
+        result = {
+            'success': True,
+            'response': 'Food added'
+        }
+    except:
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
+
+
+@app.route('/foods/<string:food_name>')
+def get_food_name(food_name):
+    pass
+
+@app.route('/foods/update/<int:food_id>')
+def update_food_id(food_id):
+    pass
+
+@app.route('/foods/delete/<int:food_id>')
+def delete_food_id(food_id):
+    pass
+
+@app.route('/recipe/add/<int:recipe_id>')
+def add_recipe(recipe_id):
+    pass
+
+@app.route('/recipe/update/<int:recipe_id>')
+def update_recipe(recipe_id):
+    pass
+
+@app.route('/recipe/delete/<int:recipe_id>')
+def delete_recipe(recipe_id):
+    pass

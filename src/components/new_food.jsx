@@ -22,13 +22,13 @@ function NewFood() {
 
         const req = {
             food_name: foodName,
-            calories: calories,
-            fat: fat,
-            protein: protein,
-            carbs: carbs,
-            sugar: sugar,
-            serving_weight: servingWeight,
-            user_id: userId
+            calories: parseInt(calories),
+            fat: parseFloat(fat),
+            protein: parseFloat(protein),
+            carbs: parseFloat(carbs),
+            sugar: parseFloat(sugar),
+            serving_weight: parseFloat(servingWeight),
+            user_id: parseInt(userId)
         }
         
         axios.post('/foods/add', req)
@@ -38,15 +38,6 @@ function NewFood() {
              .catch(err => {
                  console.log(err)
              })
-
-        console.log(foodName);
-        console.log(calories);
-        console.log(fat);
-        console.log(protein);
-        console.log(carbs);
-        console.log(sugar);
-        console.log(servingWeight);
-        console.log(userId);
     }
 
     return(

@@ -1,7 +1,7 @@
 """Setup at app startup"""
 import os
 import sqlalchemy
-from flask import Flask, request, jsonify
+from flask import Flask
 from yaml import load, Loader
 
 def init_connection_engine():
@@ -40,37 +40,10 @@ def init_connection_engine():
 
 
 app = Flask(__name__)
-# db = init_connection_engine()
-@app.route('/foods')
-def get_all_foods():
-    pass
+db = init_connection_engine()
 
-@app.route('/foods/add', methods=["POST"])
-def add_food():
-    data = request.get_json()
 
-    print(data)
-
-@app.route('/foods/<string:food_name>')
-def get_food_name(food_name):
-    pass
-
-@app.route('/foods/update/<int:food_id>')
-def update_food_id(food_id):
-    pass
-
-@app.route('/foods/delete/<int:food_id>')
-def delete_food_id(food_id):
-    pass
-
-@app.route('/recipe/add')
-def add_recipe(recipe_name):
-    pass
-
-@app.route('/recipe/update')
-def update_recipe(newrecipe_name):
-    pass
-
-@app.route('/recipe/delete')
-def delete_recipe(deleterecipe):
-    pass
+# To prevent from using a blueprint, we use a cyclic import
+# This also means that we need to place this import here
+# pylint: disable=cyclic-import, wrong-import-position
+from backend import routes

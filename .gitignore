@@ -11,6 +11,8 @@
 # pycache
 __pycache__
 
+# database credentials
+/backend/app.yaml
 
 # testing
 /coverage
