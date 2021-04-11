@@ -5,7 +5,7 @@ import Home from "./components/home";
 import Login from "./components/login";
 import NewRecipe from "./components/new_recipe";
 import NewUser from "./components/new_user";
-import NewFood from "./components/new_food";
+import NewFoodPage from "./components/new_food_page";
 import './App.css';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
                     <Route path="/new-user" component={NewUser} />
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/new-recipe" component={NewRecipe} />
-                    <Route path="/new-food" component={NewFood} />
+                    <Route path="/new-food" component={NewFoodPage} />
                     <Route path="/" component={Home} />
                 </Switch>
             </div>
