@@ -17,7 +17,8 @@ def add_food():
             'success': True,
             'response': 'Food added'
         }
-    except:
+    except Exception as e:
+        print(e)
         result = {
             'success': False,
             'response': 'Something went wrong'
@@ -26,9 +27,23 @@ def add_food():
     return jsonify(result)
 
 
-@app.route('/foods/<string:food_name>')
-def get_food_name(food_name):
-    pass
+@app.route('/foods/<string:food_name>/<int:limit>')
+def get_food_name(food_name, limit):
+
+    try:
+        food_results = db_helper.get_food_name(food_name, limit)
+        result = {
+            'success': True,
+            'response': food_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
 
 @app.route('/foods/update/<int:food_id>')
 def update_food_id(food_id):

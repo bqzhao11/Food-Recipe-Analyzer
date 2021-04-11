@@ -1,7 +1,7 @@
 from backend import db
 
 def add_food(food_data):
-    conn = db.connect()
+
     query = f"insert into Foods(foodName, calories, fat, protein, carbs, sugar, servingWeight, userId) " \
             f"values ('{food_data['food_name']}', " \
             f"{food_data['calories']}, " \
@@ -11,13 +11,43 @@ def add_food(food_data):
             f"{food_data['sugar']}, " \
             f"{food_data['serving_weight']}, " \
             f"{food_data['user_id']});"
+
+    conn = db.connect()
     conn.execute(query)
     conn.close()
 
-def get_food_name(food_name):
-    conn = db.connect()
-    query = ''
+def get_food_name(food_name, limit):
     
+    query = f"select foodName, calories, fat, protein, carbs, sugar, servingWeight " \
+            f"from Foods " \
+            f"where foodName like '%%{food_name}%%' " \
+            f"limit {limit};"
+    # query = f"select foodName, calories, fat, protein, carbs, sugar, servingWeight " \
+    #         f"from Foods " \
+    #         f"limit {limit};"
+            # f"where foodName like '%{food_name}%' " \
+            
+    print(query)
+
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    print('reached here')
+    food_results = []
+    for result in query_results:
+        foodName, calories, fat, protein, carbs, sugar, servingWeight = result
+        food_results.append({
+            "foodName": foodName,
+            "calories": calories,
+            "fat": fat,
+            "protein": protein,
+            "carbs": carbs,
+            "sugar": sugar,
+            "servingWeight": servingWeight
+        })
+
+    return food_results 
 
 def add_recipe(data):
     conn = db.connect()
