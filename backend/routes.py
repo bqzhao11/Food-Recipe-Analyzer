@@ -93,3 +93,22 @@ def update_recipe(recipe_id):
 @app.route('/recipe/delete/<int:recipe_id>')
 def delete_recipe(recipe_id):
     pass
+
+@app.route('/user/add', methods=["POST"])
+def add_user():
+    data = request.get_json()
+    
+    try:
+        db_helper.add_user(data)
+        result = {
+            'success': True,
+            'response': 'User added'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)

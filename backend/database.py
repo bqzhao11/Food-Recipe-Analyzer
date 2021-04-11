@@ -68,3 +68,15 @@ def delete_recipe(recipe_id):
     query = 'DELETE FROM Recipes WHERE recipeName = deleteRecipeName'
     conn.execute(query).fetchall()
     conn.close()
+
+def add_user(user_data):
+    conn = db.connect()
+    query = f"INSERT INTO User(userName, password, firstName, lastName, email, location) " \
+            f"VALUES ('{user_data['userName']}', " \
+            f"'{user_data['password']}', " \
+            f"'{user_data['firstName']}', " \
+            f"'{user_data['lastName']}', " \
+            f"'{user_data['email']}', " \
+            f"'{user_data['location']}');"
+    conn.execute(query)
+    conn.close()
