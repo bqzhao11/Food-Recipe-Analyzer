@@ -27,10 +27,6 @@ function NewRecipe() {
     const [newRecipe, setnewRecipe] = useState("");
     const [deleterecipe, setdeleterecipe] = useState("");
     
-    const req = {
-        recipe_name: recipe,
-        newrecipe_name: newRecipe
-    };
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -39,7 +35,10 @@ function NewRecipe() {
         } else {
             alert(`Recipe ${recipe} was added!`);
         }
-        axios.post('/recipe/add/<int:recipe_id>', req)
+        const req = {
+            recipe_name: recipe,
+        };
+        axios.post('/recipe/add', req)
              .then(res => {
                  console.log(res)
              })
@@ -56,6 +55,10 @@ function NewRecipe() {
         } else {
             alert(`Recipe '${oldRecipe}' was Updated To '${newRecipe}'!`);
         }
+        const req = {
+            Oldrecipe_name: oldRecipe,
+            Newrecipe_name: newRecipe
+        };
         axios.post('/recipe/update/<int:recipe_id>', req)
              .then(res => {
                  console.log(res)
@@ -71,6 +74,9 @@ function NewRecipe() {
         } else {
             alert(`Recipe '${deleterecipe}' was Deleted!`);
         }
+        const req = {
+            deleteRecipeName: deleterecipe
+        };
         axios.post('/recipe/delete/<int:recipe_id>', req)
              .then(res => {
                  console.log(res)

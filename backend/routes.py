@@ -38,9 +38,23 @@ def update_food_id(food_id):
 def delete_food_id(food_id):
     pass
 
-@app.route('/recipe/add/<int:recipe_id>')
-def add_recipe(recipe_id):
-    pass
+
+@app.route('/recipe/add')
+def add_recipe():
+    data = request.get_json()
+    try:
+        db.add_recipe(data)
+        result = {
+            'success': True,
+            'response': 'Recipe added'
+        }
+    except:
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
 
 @app.route('/recipe/update/<int:recipe_id>')
 def update_recipe(recipe_id):
