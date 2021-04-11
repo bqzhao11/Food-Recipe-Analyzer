@@ -34,7 +34,7 @@ function NewRecipe() {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        if (recipe == '') {
+        if (recipe === '') {
             alert('Please Enter a Recipe!');
         } else {
             alert(`Recipe ${recipe} was added!`);
@@ -49,9 +49,9 @@ function NewRecipe() {
     }
 
     const handleUpdate = (evt) => {
-        if (oldRecipe  == '') {
+        if (oldRecipe  === '') {
             alert('Please Enter The Origin Recipe Name For Update');
-        } else if (newRecipe == '') {
+        } else if (newRecipe === '') {
             alert('Please Enter The New Recipe Name For Update');
         } else {
             alert(`Recipe '${oldRecipe}' was Updated To '${newRecipe}'!`);
@@ -66,7 +66,7 @@ function NewRecipe() {
     }
 
     const handleDelete = (e) => {
-        if (deleterecipe == '') {
+        if (deleterecipe === '') {
             alert('Please Enter A Recipe Name To Delete');
         } else {
             alert(`Recipe '${deleterecipe}' was Deleted!`);

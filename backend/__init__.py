@@ -1,7 +1,7 @@
 """Setup at app startup"""
 import os
 import sqlalchemy
-from flask import Flask, request, jsonify
+from flask import Flask
 from yaml import load, Loader
 
 def init_connection_engine():
@@ -43,49 +43,7 @@ app = Flask(__name__)
 db = init_connection_engine()
 
 
-@app.route('/foods')
-def get_all_foods():
-    pass
-
-@app.route('/foods/add', methods=["POST"])
-def add_food():
-    data = request.get_json()
-
-    try:
-        db.add_food(data)
-        result = {
-            'success': True,
-            'response': 'Food added'
-        }
-    except:
-        result = {
-            'success': False,
-            'response': 'Something went wrong'
-        }
-
-    return jsonify(result)
-
-
-@app.route('/foods/<string:food_name>')
-def get_food_name(food_name):
-    pass
-
-@app.route('/foods/update/<int:food_id>')
-def update_food_id(food_id):
-    pass
-
-@app.route('/foods/delete/<int:food_id>')
-def delete_food_id(food_id):
-    pass
-
-@app.route('/recipe/add/<int:recipe_id>')
-def add_recipe(recipe_id):
-    pass
-
-@app.route('/recipe/update/<int:recipe_id>')
-def update_recipe(recipe_id):
-    pass
-
-@app.route('/recipe/delete/<int:recipe_id>')
-def delete_recipe(recipe_id):
-    pass
+# To prevent from using a blueprint, we use a cyclic import
+# This also means that we need to place this import here
+# pylint: disable=cyclic-import, wrong-import-position
+from backend import routes

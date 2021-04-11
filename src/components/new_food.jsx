@@ -22,13 +22,13 @@ function NewFood() {
 
         const req = {
             food_name: foodName,
-            calories: calories,
-            fat: fat,
-            protein: protein,
-            carbs: carbs,
-            sugar: sugar,
-            serving_weight: servingWeight,
-            user_id: userId
+            calories: parseInt(calories),
+            fat: parseFloat(fat),
+            protein: parseFloat(protein),
+            carbs: parseFloat(carbs),
+            sugar: parseFloat(sugar),
+            serving_weight: parseFloat(servingWeight),
+            user_id: parseInt(userId)
         }
         
         axios.post('/foods/add', req)
