@@ -43,7 +43,7 @@ def delete_food_id(food_id):
 def add_recipe():
     data = request.get_json()
     try:
-        db.add_recipe(data)
+        db_helper.add_recipe(data)
         result = {
             'success': True,
             'response': 'Recipe added'
