@@ -102,3 +102,8 @@ def update_recipe(recipe_id):
 @app.route('/recipe/delete/<int:recipe_id>')
 def delete_recipe(recipe_id):
     pass
+
+@app.route('/recipe/search_healthy/')
+def search_healthy():
+    pass
+

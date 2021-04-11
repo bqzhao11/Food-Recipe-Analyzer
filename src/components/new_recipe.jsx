@@ -1,12 +1,8 @@
-import { render } from "@testing-library/react";
 import React from "react";
 import { useState } from "react";
 import "axios"
 import axios from "axios";
 
-var buttonStyle = {
-  margin: '10px 10px 10px 0'
-}
 
 const people = [
     "Apple Pie",
@@ -26,11 +22,13 @@ function NewRecipe() {
     const [oldRecipe, setoldRecipe] = useState("");
     const [newRecipe, setnewRecipe] = useState("");
     const [deleterecipe, setdeleterecipe] = useState("");
+    const [cal, setCal] = useState("");
+    const [sugar, setSugar] = useState("");
     
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        if (recipe == '') {
+        if (recipe === '') {
             alert('Please Enter a Recipe!');
         } else {
             alert(`Recipe ${recipe} was added!`);
@@ -48,9 +46,9 @@ function NewRecipe() {
     }
 
     const handleUpdate = (evt) => {
-        if (oldRecipe  == '') {
+        if (oldRecipe  === '') {
             alert('Please Enter The Origin Recipe Name For Update');
-        } else if (newRecipe == '') {
+        } else if (newRecipe === '') {
             alert('Please Enter The New Recipe Name For Update');
         } else {
             alert(`Recipe '${oldRecipe}' was Updated To '${newRecipe}'!`);
@@ -69,7 +67,7 @@ function NewRecipe() {
     }
 
     const handleDelete = (e) => {
-        if (deleterecipe == '') {
+        if (deleterecipe === '') {
             alert('Please Enter A Recipe Name To Delete');
         } else {
             alert(`Recipe '${deleterecipe}' was Deleted!`);
@@ -78,6 +76,27 @@ function NewRecipe() {
             deleteRecipeName: deleterecipe
         };
         axios.post('/recipe/delete/<int:recipe_id>', req)
+             .then(res => {
+                 console.log(res)
+             })
+             .catch(err => {
+                 console.log(err)
+             })
+    }
+
+    const handleHealthyFood = (evt) => {
+        if (sugar  === '') {
+            alert('Please Enter The Number (In Grams) Of Sugar You Desire The Foods Should Contain');
+        } else if (cal === '') {
+            alert('Please Enter The Number Of Caliores You Desire The Foods Should Contain');
+        } else {
+            alert(`Here is 15 Food and Drinks That's Below ${cal} Calories and ${sugar} Grams of Sugar!`);
+        }
+        const req = {
+            calCount: cal,
+            sugarCount: sugar
+        };
+        axios.post('/recipe/search_healthy/', req)
              .then(res => {
                  console.log(res)
              })
@@ -100,6 +119,14 @@ function NewRecipe() {
 
     const handleNewrecipe = event => {
         setnewRecipe(event.target.value);
+    };
+
+    const handleCal = event => {
+        setCal(event.target.value);
+    };
+
+    const handleSugar = event => {
+        setSugar(event.target.value);
     };
 
     React.useEffect(() => {
@@ -189,6 +216,32 @@ function NewRecipe() {
                 className="btn"
                 style={{ flex: "1" }}
                 />     
+            </form>
+
+            <form onSubmit = {handleHealthyFood}>
+                <h4>Can't Decide? Press The Button To See 15 Random Selection Of Healthy Foods</h4>
+                <input 
+                    Type = "text"
+                    name = "Title"
+                    style={{ flex: "10", padding: "5px" }}
+                    placeholder= "Total Calories"
+                    value = {cal}
+                    onChange={handleCal}
+                    />
+                <input 
+                    Type = "text"
+                    name = "Title"
+                    style={{ flex: "10", padding: "5px" }}
+                    placeholder= "Total Sugar(Grams)"
+                    value = {sugar}
+                    onChange={handleSugar}
+                    />
+                <input
+                    type="submit"
+                    value="Search"
+                    className="btn"
+                    style={{ flex: "1" }}
+                    />    
             </form>
             
         </div>
