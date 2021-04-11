@@ -18,26 +18,20 @@ def add_food(food_data):
 
 def get_food_name(food_name, limit):
     
-    query = f"select foodName, calories, fat, protein, carbs, sugar, servingWeight " \
+    query = f"select foodId, foodName, calories, fat, protein, carbs, sugar, servingWeight " \
             f"from Foods " \
             f"where foodName like '%%{food_name}%%' " \
             f"limit {limit};"
-    # query = f"select foodName, calories, fat, protein, carbs, sugar, servingWeight " \
-    #         f"from Foods " \
-    #         f"limit {limit};"
-            # f"where foodName like '%{food_name}%' " \
             
-    print(query)
-
     conn = db.connect()
     query_results = conn.execute(query).fetchall()
     conn.close()
 
-    print('reached here')
     food_results = []
     for result in query_results:
-        foodName, calories, fat, protein, carbs, sugar, servingWeight = result
+        foodId, foodName, calories, fat, protein, carbs, sugar, servingWeight = result
         food_results.append({
+            "foodId": foodId,
             "foodName": foodName,
             "calories": calories,
             "fat": fat,
@@ -48,6 +42,14 @@ def get_food_name(food_name, limit):
         })
 
     return food_results 
+
+def delete_food_id(food_id):
+
+    query = f'delete from Foods where foodId={food_id}'
+
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
 
 def add_recipe(data):
     conn = db.connect()
