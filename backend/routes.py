@@ -99,6 +99,23 @@ def delete_food_id(food_id):
     
     return jsonify(result)
 
+@app.route('/foods/adv-query', methods=['GET'])
+def run_adv_query():
+    try:
+        query_result = db_helper.run_adv_query()
+        result = {
+            'success': True,
+            'response': query_result
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
+
 
 @app.route('/recipe/add')
 def add_recipe():
