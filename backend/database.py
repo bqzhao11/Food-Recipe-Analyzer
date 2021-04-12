@@ -43,13 +43,15 @@ def get_food_name(food_name, limit):
 
     return food_results 
 
-def delete_food_id(food_id):
+def update_food(food_id, food_data):
 
     query = f'delete from Foods where foodId={food_id}'
 
     conn = db.connect()
     conn.execute(query)
     conn.close()
+
+def update_food_id(food_id):
 
 def add_recipe(data):
     conn = db.connect()
