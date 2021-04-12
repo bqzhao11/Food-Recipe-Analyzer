@@ -16,6 +16,28 @@ def add_food(food_data):
     conn.execute(query)
     conn.close()
 
+def get_food_id(food_id):
+
+    query = f"select foodName, calories, fat, protein, carbs, sugar, servingWeight " \
+            f"from Foods " \
+            f"where foodId = {food_id}"
+
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    foodName, calories, fat, protein, carbs, sugar, servingWeight = query_results[0]
+
+    return {
+        "foodName": foodName,
+        "calories": calories,
+        "fat": fat,
+        "protein": protein,
+        "carbs": carbs,
+        "sugar": sugar,
+        "servingWeight": servingWeight
+    }
+
 def get_food_name(food_name, limit):
     
     query = f"select foodId, foodName, calories, fat, protein, carbs, sugar, servingWeight " \
@@ -50,6 +72,51 @@ def delete_food_id(food_id):
     conn = db.connect()
     conn.execute(query)
     conn.close()
+
+def update_food_id(food_id, food_data):
+    query = f"update Foods " \
+            f"set foodName = '{food_data['food_name']}', " \
+            f"calories = {food_data['calories']}, " \
+            f"fat = {food_data['fat']}, " \
+            f"protein = {food_data['protein']}, " \
+            f"carbs = {food_data['carbs']}, " \
+            f"sugar = {food_data['sugar']}, " \
+            f"servingWeight = {food_data['serving_weight']} " \
+            f"where foodId = {food_id}"
+    
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def run_adv_query():
+    query = "(select 'Food', calories, avg(sugar) as avgSugar " \
+            "from Foods " \
+            "where sugar > 1 " \
+            "group by calories " \
+            "order by calories desc " \
+            "limit 7) " \
+            "union " \
+            "(select 'Drinks', calories, avg(sugar) as avgSugar " \
+            "from Drinks " \
+            "where sugar > 1 " \
+            "group by calories " \
+            "order by calories desc " \
+            "limit 8); " 
+    
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    adv_results = []
+    for result in query_results:
+        name, calories, avg_sugar = result
+        adv_results.append({
+            'type': name,
+            'calories': calories,
+            'avg_sugar': avg_sugar
+        })
+    
+    return adv_results
 
 def add_recipe(data):
     conn = db.connect()
