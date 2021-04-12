@@ -116,3 +116,34 @@ def update_password(user_data):
     conn = db.connect()
     conn.execute(query)
     conn.close()
+
+def bounded_overview(attributeName, upperBound, lowerBound):
+    query = f"SELECT _name, avg(calories) as avgCalories, avg(fat) as avgFat, avg(protein) as avgProtein, avg(carbs) as avgCarbs, avg(sugar) as avgSugar\n" \
+            f"FROM ((SELECT 'Food' as _name, calories, fat, protein, carbs, sugar\n" \
+            f"FROM Foods\n" \
+            f"WHERE {attributeName} <= {upperBound} AND " \
+            f"{attributeName} >= {lowerBound})\n" \
+            f"UNION\n" \
+            f"(SELECT 'Drink' as _name, calories, fat, protein, carbs, sugar\n" \
+            f"FROM Drinks\n" \
+            f"WHERE {attributeName} <= {upperBound} AND " \
+            f"{attributeName} >= {lowerBound})) as t\n" \
+            f"group by _name\n;"
+    
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    overview_results = []
+    for result in query_results:
+        _name, avgCalories, avgFat, avgProtein, avgCarbs, avgSugar = result
+        overview_results.append({
+            "_name": _name,
+            "avgCalories": str(avgCalories),
+            "avgFat": str(avgFat),
+            "avgProtein": str(avgProtein),
+            "avgCarbs": str(avgCarbs),
+            "avgSugar": str(avgSugar),
+        })
+    
+    return overview_results
