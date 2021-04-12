@@ -4,8 +4,9 @@ import Dashboard from "./components/dashboard";
 import Home from "./components/home";
 import Login from "./components/login";
 import NewRecipe from "./components/new_recipe";
-import NewUser from "./components/new_user";
+import NewUserPage from "./components/new_user_page";
 import NewFoodPage from "./components/new_food_page";
+import UpdatePassword from "./components/update_password"
 import './App.css';
 
 function App() {
@@ -16,10 +17,11 @@ function App() {
                 renders the first one that matches the current URL. */}
                 <Switch>
                     <Route path="/login" component={Login} />
-                    <Route path="/new-user" component={NewUser} />
+                    <Route path="/new-user" component={NewUserPage} />
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/new-recipe" component={NewRecipe} />
                     <Route path="/new-food" component={NewFoodPage} />
+                    <Route path="/update-password" component={UpdatePassword} />
                     <Route path="/" component={Home} />
                 </Switch>
             </div>
