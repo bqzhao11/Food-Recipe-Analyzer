@@ -12,8 +12,8 @@ function GetFood() {
     const [updateFoodId, setUpdateFoodId] = useState();
 
     const turnOnUpdate = foodId => {
-        setDisplayUpdate(true);
         setUpdateFoodId(foodId);
+        setDisplayUpdate(true);
     }
 
     const turnOffUpdate = () => {
@@ -79,13 +79,13 @@ function GetFood() {
                                 <td>{item.sugar}</td>
                                 <td>{item.servingWeight}</td> 
                                 <td><div onClick={handleSubmit} ><DeleteFoodButton foodId={item.foodId} /></div></td>
-                                <td><UpdateFoodButton foodId={item.foodId} turn_on_display={turnOnUpdate}/></td>
+                                <td><UpdateFoodButton foodId={item.foodId} turnOnUpdate={turnOnUpdate}  /></td>
                             </tr>
                         ))
                     }
                 </tbody>
             </table>
-            {displayUpdate && (<UpdateFood food_id={updateFoodId} turn_off_display={turnOffUpdate} />)}
+            {displayUpdate && (<UpdateFood foodId={updateFoodId} turnOffUpdate={turnOffUpdate} handleSubmit={handleSubmit} />)}
         </div>
     )
 }

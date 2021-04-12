@@ -12,7 +12,7 @@ function UpdateFood(props) {
     const [servingWeight, setServingWeight] = useState('');
 
     useEffect(() => {
-        axios.get(`/food/${props.foodId}`)
+        axios.get(`/foods/${props.foodId}`)
              .then(res => {
                  if (res.data.success) {
                      setFoodName(res.data.response.foodName);
@@ -24,7 +24,7 @@ function UpdateFood(props) {
                      setServingWeight(res.data.response.servingWeight);
                  }
              })
-    })
+    }, []);
 
     const handleSubmit = e => {
 
@@ -38,7 +38,7 @@ function UpdateFood(props) {
             serving_weight: servingWeight
         }
 
-        axios.post(`food/update/${props.food_id}`, req)
+        axios.post(`foods/update/${props.foodId}`, req)
              .then(res => {
                  console.log(res);
              })
@@ -46,8 +46,8 @@ function UpdateFood(props) {
                  console.log(err);
              });
 
-        props.turn_off_display();
-
+        props.turnOffUpdate();
+        props.handleSubmit(e);
     }
 
     return (

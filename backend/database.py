@@ -75,13 +75,13 @@ def delete_food_id(food_id):
 
 def update_food_id(food_id, food_data):
     query = f"update Foods " \
-            f"set foodName = '{food_data.food_name}', " \
-            f"calories = {food_data.calories}, " \
-            f"fat = {food_data.fat}, " \
-            f"protein = {food_data.protein}, " \
-            f"carbs = {food_data.carbs}, " \
-            f"sugar = {food_data.sugar}, " \
-            f"servingWeight = {food_data.serving_weight} " \
+            f"set foodName = '{food_data['food_name']}', " \
+            f"calories = {food_data['calories']}, " \
+            f"fat = {food_data['fat']}, " \
+            f"protein = {food_data['protein']}, " \
+            f"carbs = {food_data['carbs']}, " \
+            f"sugar = {food_data['sugar']}, " \
+            f"servingWeight = {food_data['serving_weight']} " \
             f"where foodId = {food_id}"
     
     conn = db.connect()

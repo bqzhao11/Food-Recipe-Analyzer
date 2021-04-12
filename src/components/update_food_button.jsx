@@ -3,7 +3,7 @@ import React from "react";
 function UpdateFoodButton(props) {
 
     const handleClick = e => {
-        props.turn_on_display(props.foodId)
+        props.turnOnUpdate(props.foodId);
     }
 
     return (
