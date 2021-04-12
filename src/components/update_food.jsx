@@ -1,10 +1,8 @@
-import React, { useState } from "react";
-import "axios"
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 
-function NewFood() {
-
+function UpdateFood(props) {
     const [foodName, setFoodName] = useState('');
     const [calories, setCalories] = useState('');
     const [fat, setFat] = useState('');
@@ -12,39 +10,50 @@ function NewFood() {
     const [carbs, setCarbs] = useState('');
     const [sugar, setSugar] = useState('');
     const [servingWeight, setServingWeight] = useState('');
-    const [userId, setUserId] = useState('');
+
+    useEffect(() => {
+        axios.get(`/foods/${props.foodId}`)
+             .then(res => {
+                 if (res.data.success) {
+                     setFoodName(res.data.response.foodName);
+                     setCalories(res.data.response.calories);
+                     setFat(res.data.response.fat);
+                     setProtein(res.data.response.protein);
+                     setCarbs(res.data.response.carbs);
+                     setSugar(res.data.response.sugar);
+                     setServingWeight(res.data.response.servingWeight);
+                 }
+             })
+    }, []);
 
     const handleSubmit = e => {
-        e.preventDefault();
-        if (foodName === "") {
-            alert("Please enter a food name");
-        }
 
         const req = {
             food_name: foodName,
-            calories: parseInt(calories),
-            fat: parseFloat(fat),
-            protein: parseFloat(protein),
-            carbs: parseFloat(carbs),
-            sugar: parseFloat(sugar),
-            serving_weight: parseFloat(servingWeight),
-            user_id: parseInt(userId)
+            calories: calories,
+            fat: fat,
+            protein: protein,
+            carbs: carbs,
+            sugar: sugar,
+            serving_weight: servingWeight
         }
-        
-        axios.post('/foods/add', req)
+
+        axios.post(`foods/update/${props.foodId}`, req)
              .then(res => {
-                 console.log(res)
+                 console.log(res);
              })
              .catch(err => {
-                 console.log(err)
-             })
+                 console.log(err);
+             });
+
+        props.turnOffUpdate();
+        props.handleSubmit(e);
     }
 
-    return(
+    return (
         <div>
-            <h2>This is the New Food Page</h2>
             <form onSubmit={handleSubmit}>
-                <label>
+            <label>
                     Food Name: <input type='text' 
                                       value={foodName} 
                                       onChange={e => setFoodName(e.target.value)} 
@@ -86,17 +95,11 @@ function NewFood() {
                                            onChange={e => setServingWeight(e.target.value)}
                                            placeholder="Serving Weight (g)" />
                 </label><br />
-                <label>
-                    User ID: <input type='text' 
-                                    value={userId} 
-                                    onChange={e => setUserId(e.target.value)}
-                                    placeholder="User ID" />
-                </label><br/>
-                <input type="submit" value="Add Food" />
+                <input type="submit" value="Update" />
             </form>
         </div>
-    );
+    )
 }
 
-export default NewFood;
 
+export default UpdateFood;
