@@ -1,11 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
 import DeleteFoodButton from "./delete_food_button";
+import UpdateFood from "./update_food"
+import UpdateFoodButton from "./update_food_button"
 
 function GetFood() {
     const [foodName, setFoodName] = useState('');
     const [limit, setLimit] = useState(0);
     const [foodResults, setFoodResults] = useState([]);
+    const [displayUpdate, setDisplayUpdate] = useState(false);
+    const [updateFoodId, setUpdateFoodId] = useState();
+
+    const turnOnUpdate = foodId => {
+        setDisplayUpdate(true);
+        setUpdateFoodId(foodId);
+    }
+
+    const turnOffUpdate = () => {
+        setDisplayUpdate(false);
+    }
 
 
     const handleSubmit = e => {
@@ -51,6 +64,7 @@ function GetFood() {
                         <th>Sugar</th>
                         <th>Serving Weight</th>
                         <th>Delete</th>
+                        <th>Update</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,11 +79,13 @@ function GetFood() {
                                 <td>{item.sugar}</td>
                                 <td>{item.servingWeight}</td> 
                                 <td><div onClick={handleSubmit} ><DeleteFoodButton foodId={item.foodId} /></div></td>
+                                <td><UpdateFoodButton foodId={item.foodId} turn_on_display={turnOnUpdate}/></td>
                             </tr>
                         ))
                     }
                 </tbody>
             </table>
+            {displayUpdate && (<UpdateFood food_id={updateFoodId} turn_off_display={turnOffUpdate} />)}
         </div>
     )
 }
