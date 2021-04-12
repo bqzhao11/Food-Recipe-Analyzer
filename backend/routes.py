@@ -94,10 +94,10 @@ def update_recipe(recipe_id):
 def delete_recipe(recipe_id):
     pass
 
-@app.route('/user/add', methods=["POST"])
+@app.route('/user/add', methods = ["POST"])
 def add_user():
     data = request.get_json()
-    
+
     try:
         db_helper.add_user(data)
         result = {
@@ -111,4 +111,60 @@ def add_user():
             'response': 'Something went wrong'
         }
 
+    return jsonify(result)
+
+@app.route('/user/<string:user_name>', methods = ["GET"])
+def get_user(user_name):
+    data = request.get_json()
+
+    try:
+        user_results = db_helper.get_user(user_name)
+        result = {
+            'success': True,
+            'response': user_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+@app.route('/user/delete/<int:user_id>', methods = ["POST"])
+def delete_user(user_id):
+    data = request.get_json()
+
+    try:
+        db_helper.delete_user(user_id)
+        result = {
+            'success': True,
+            'response': 'Deleted user'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+@app.route('/user/update', methods = ["POST"])
+def update_password():
+    data = request.get_json()
+    try:
+        db_helper.update_password(data)
+        result = {
+            'success': True,
+            'response': 'Successfully changed password'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
     return jsonify(result)

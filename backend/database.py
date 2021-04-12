@@ -70,7 +70,6 @@ def delete_recipe(recipe_id):
     conn.close()
 
 def add_user(user_data):
-    conn = db.connect()
     query = f"INSERT INTO User(userName, password, firstName, lastName, email, location) " \
             f"VALUES ('{user_data['userName']}', " \
             f"'{user_data['password']}', " \
@@ -78,5 +77,42 @@ def add_user(user_data):
             f"'{user_data['lastName']}', " \
             f"'{user_data['email']}', " \
             f"'{user_data['location']}');"
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def get_user(user_name):
+    query = f"SELECT userId, userName, firstName, lastName, email, location " \
+            f"FROM User " \
+            f"WHERE userName LIKE '%%{user_name}%%';"
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    user_results = []
+    for result in query_results:
+        userId, userName, firstName, lastName, email, location = result
+        user_results.append({
+            "userId": userId,
+            "userName": userName,
+            "firstName": firstName,
+            "lastName": lastName,
+            "email": email,
+            "location": location,
+        })
+
+    return user_results
+
+def delete_user(user_id):
+    query = f"DELETE FROM User WHERE userId={user_id}"
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def update_password(user_data):
+    query = f"UPDATE User SET password='{user_data['newPassword']}' " \
+            f"WHERE userName='{user_data['userName']}' AND " \
+            f"password='{user_data['oldPassword']}';"
+    conn = db.connect()
     conn.execute(query)
     conn.close()
