@@ -68,8 +68,6 @@ def delete_recipe(recipe_id):
     query = 'DELETE FROM Recipes WHERE recipeName = deleteRecipeName'
     conn.execute(query).fetchall()
     conn.close()
-<<<<<<< HEAD
-=======
 
 def add_user(user_data):
     conn = db.connect()
@@ -82,4 +80,3 @@ def add_user(user_data):
             f"'{user_data['location']}');"
     conn.execute(query)
     conn.close()
->>>>>>> master
