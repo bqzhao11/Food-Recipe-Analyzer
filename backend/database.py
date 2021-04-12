@@ -102,3 +102,17 @@ def get_user(user_name):
         })
 
     return user_results
+
+def delete_user(user_id):
+    query = f"DELETE FROM User WHERE userId={user_id}"
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def update_password(user_data):
+    query = f"UPDATE User SET password='{user_data['newPassword']}' " \
+            f"WHERE userName='{user_data['userName']}' AND " \
+            f"password='{user_data['oldPassword']}';"
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
