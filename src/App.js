@@ -6,7 +6,8 @@ import Login from "./components/login";
 import NewRecipe from "./components/new_recipe";
 import NewUserPage from "./components/new_user_page";
 import NewFoodPage from "./components/new_food_page";
-import UpdatePassword from "./components/update_password"
+import UpdatePassword from "./components/update_password";
+import FoodDrinkOverview from "./components/food_drink_overview";
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/new-recipe" component={NewRecipe} />
                     <Route path="/new-food" component={NewFoodPage} />
                     <Route path="/update-password" component={UpdatePassword} />
+                    <Route path="/overview" component={FoodDrinkOverview} />
                     <Route path="/" component={Home} />
                 </Switch>
             </div>

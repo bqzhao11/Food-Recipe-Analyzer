@@ -163,8 +163,6 @@ def add_user():
 
 @app.route('/user/<string:user_name>', methods = ["GET"])
 def get_user(user_name):
-    data = request.get_json()
-
     try:
         user_results = db_helper.get_user(user_name)
         result = {
@@ -207,6 +205,23 @@ def update_password():
         result = {
             'success': True,
             'response': 'Successfully changed password'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+@app.route('/overview/<string:attributeName>/<string:upperBound>/<string:lowerBound>', methods = ["GET"])
+def bounded_overview(attributeName, upperBound, lowerBound):
+    try:
+        overview_results = db_helper.bounded_overview(attributeName, upperBound, lowerBound)
+        result = {
+            'success': True,
+            'response': overview_results
         }
     except Exception as e:
         print(e)
