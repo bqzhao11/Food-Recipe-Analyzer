@@ -88,6 +88,36 @@ def update_food_id(food_id, food_data):
     conn.execute(query)
     conn.close()
 
+def run_adv_query():
+    query = "(select 'Food', calories, avg(sugar) as avgSugar " \
+            "from Foods " \
+            "where sugar > 1 " \
+            "group by calories " \
+            "order by calories desc " \
+            "limit 7) " \
+            "union " \
+            "(select 'Drinks', calories, avg(sugar) as avgSugar " \
+            "from Drinks " \
+            "where sugar > 1 " \
+            "group by calories " \
+            "order by calories desc " \
+            "limit 8); " 
+    
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    adv_results = []
+    for result in query_results:
+        name, calories, avg_sugar = result
+        adv_results.append({
+            'type': name,
+            'calories': calories,
+            'avg_sugar': avg_sugar
+        })
+    
+    return adv_results
+
 def add_recipe(data):
     conn = db.connect()
     query = 'INSERT INTO Recipes(recipeName,userId) VALUES(recipe_name, 1)'
