@@ -20,7 +20,6 @@ function GetFood() {
         setDisplayUpdate(false);
     }
 
-
     const handleSubmit = e => {
         e.preventDefault();
 

@@ -12,7 +12,6 @@ const people = [
     "Stake"
   ];
   
-  
 
 function NewRecipe() {
 

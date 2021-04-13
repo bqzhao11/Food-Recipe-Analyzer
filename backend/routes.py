@@ -117,7 +117,7 @@ def run_adv_query():
     return jsonify(result)
 
 
-@app.route('/recipe/add')
+@app.route('/recipe/add', methods=['POST'])
 def add_recipe():
     data = request.get_json()
     try:
@@ -140,6 +140,10 @@ def update_recipe(recipe_id):
 
 @app.route('/recipe/delete/<int:recipe_id>')
 def delete_recipe(recipe_id):
+    pass
+
+@app.route('/recipe/search_healthy')
+def search_healthy():
     pass
 
 @app.route('/user/add', methods = ["POST"])
