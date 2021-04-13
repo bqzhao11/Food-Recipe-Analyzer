@@ -120,13 +120,32 @@ def run_adv_query():
 @app.route('/recipe/add', methods=['POST'])
 def add_recipe():
     data = request.get_json()
+
     try:
         db_helper.add_recipe(data)
         result = {
             'success': True,
             'response': 'Recipe added'
         }
-    except:
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    return jsonify(result)
+
+@app.route('/recipe/update/<int:recipe_id>', methods = ["POST"])
+def update_recipe(recipe_id):
+    data = request.get_json()
+    try:
+        db_helper.update_recipe(recipe_id, data)
+        result = {
+            'success': True,
+            'response': f'Updated {recipe_id} successfully'
+        }
+    except Exception as e:
+        print(e)
         result = {
             'success': False,
             'response': 'Something went wrong'
@@ -134,17 +153,56 @@ def add_recipe():
 
     return jsonify(result)
 
-@app.route('/recipe/update/<int:recipe_id>')
-def update_recipe(recipe_id):
-    pass
-
-@app.route('/recipe/delete/<int:recipe_id>')
+@app.route('/recipe/delete/<int:recipe_id>', methods = ["POST"])
 def delete_recipe(recipe_id):
-    pass
+    try:
+        db_helper.delete_recipe(recipe_id)
+        result = {
+            'success': True,
+            'response': f'Deleted {recipe_id} successfully'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
 
-@app.route('/recipe/search_healthy')
+@app.route('/recipe/search_recipe/<string:recipe_name>', methods=['GET'])
+def search_recipe():
+    try:
+        recupe_returns = db_helper.search_recipe(recipe_name)
+        result = {
+            'success': True,
+            'response': recupe_returns
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+@app.route('/recipe/search_healthy', methods=['GET'])
 def search_healthy():
-    pass
+    try:
+        query_result = db_helper.search_healthy()
+        result = {
+            'success': True,
+            'response': query_result
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
 
 @app.route('/user/add', methods = ["POST"])
 def add_user():
