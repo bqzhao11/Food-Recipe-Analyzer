@@ -2,7 +2,6 @@ from flask import render_template, request, jsonify
 from backend import app
 from backend import database as db_helper
 
-
 @app.route('/foods')
 def get_all_foods():
     pass
@@ -231,3 +230,124 @@ def bounded_overview(attributeName, upperBound, lowerBound):
         }
     
     return jsonify(result)
+
+
+@app.route('/drinks')
+def get_all_drinks():
+    pass
+
+@app.route('/drinks/add', methods=["POST"])
+def add_drink():
+    data = request.get_json()
+
+    try:
+        db_helper.add_drink(data)
+        result = {
+            'success': True,
+            'response': 'Drink added'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
+
+@app.route('/drinks/<int:drink_id>', methods=['GET'])
+def get_drink_id(drink_id):
+
+    try:
+        drink_results = db_helper.get_drink_id(drink_id)
+        result = {
+            'success': True,
+            'response': drink_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+@app.route('/drinks/<string:drink_name>/<int:limit>', methods=['GET'])
+def get_drink_name(drink_name, limit):
+
+    try:
+        drink_results = db_helper.get_drink_name(drink_name, limit)
+        result = {
+            'success': True,
+            'response': drink_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+@app.route('/drinks/update/<int:drink_id>', methods=['POST'])
+def update_drink_id(drink_id):
+    data = request.get_json()
+
+    try:
+        db_helper.update_drink_id(drink_id, data)
+        result = {
+            'success': True,
+            'response': f'Updated {drink_id} successfully'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
+    
+
+@app.route('/drinks/delete/<int:drink_id>', methods=['POST'])
+def delete_drink_id(drink_id):
+    try:
+        db_helper.delete_drink_id(drink_id)
+        result = {
+            'success': True,
+            'response': f'Deleted {drink_id} successfully'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+
+@app.route('/drinks/advanced-query', methods=['GET'])
+def run_advanced_query():
+    try:
+        query_results = db_helper.run_advanced_query()
+        result = {
+            'success': True,
+            'response': query_results        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result) 
+
+    
+
+
+
+
+
