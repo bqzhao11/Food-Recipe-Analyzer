@@ -107,7 +107,7 @@ def run_adv_query():
     query_results = conn.execute(query).fetchall()
     conn.close()
 
-    adv_results = []
+    adv_results = []   
     for result in query_results:
         name, calories, avg_sugar = result
         adv_results.append({
@@ -177,7 +177,7 @@ def add_user(user_data):
 def get_user(user_name):
     query = f"SELECT userId, userName, firstName, lastName, email, location " \
             f"FROM User " \
-            f"WHERE userName LIKE '%%{user_name}%%';"
+            f"WHERE userName LIKE '%%{user_name}%%';"  
     conn = db.connect()
     query_results = conn.execute(query).fetchall()
     conn.close()
@@ -240,3 +240,134 @@ def bounded_overview(attributeName, upperBound, lowerBound):
         })
     
     return overview_results
+
+
+def add_drink(drink_data):
+    query = f"insert into Drinks(drinkName, calories, fat, protein, carbs, sugar, servingWeight, userId) " \
+            f"values ('{drink_data['drink_name']}', " \
+            f"{drink_data['calories']}, " \
+            f"{drink_data['fat']}, " \
+            f"{drink_data['protein']}, " \
+            f"{drink_data['carbs']}, " \
+            f"{drink_data['sugar']}, " \
+            f"{drink_data['serving_weight']}, " \
+            f"{drink_data['user_id']});"    
+
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def get_drink_id(drink_id):
+
+    query = f"select drinkName, calories, fat, protein, carbs, sugar, servingWeight " \
+            f"from Drinks " \
+            f"where drinkId = {drink_id}"
+
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    drinkName, calories, fat, protein, carbs, sugar, servingWeight = query_results[0]
+
+    return {
+        "drinkName": drinkName,
+        "calories": calories,
+        "fat": fat,
+        "protein": protein,
+        "carbs": carbs,
+        "sugar": sugar,
+        "servingWeight": servingWeight
+    }
+
+def get_drink_name(drink_name, limit):
+    
+    query = f"select drinkId, drinkName, calories, fat, protein, carbs, sugar, servingWeight " \
+            f"from Drinks " \
+            f"where drinkName like '%%{drink_name}%%' " \
+            f"limit {limit};"
+            
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    drink_results = []
+    for result in query_results:
+        drinkId, drinkName, calories, fat, protein, carbs, sugar, servingWeight = result
+        drink_results.append({
+            "drinkId": drinkId,
+            "drinkName": drinkName,
+            "calories": calories,
+            "fat": fat,
+            "protein": protein,
+            "carbs": carbs,
+            "sugar": sugar,
+            "servingWeight": servingWeight
+        })
+
+    return drink_results 
+
+def delete_drink_id(drink_id):
+
+    query = f'delete from Drinks where drinkId={drink_id}'
+
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def update_drink_id(drink_id, drink_data):
+    query = f"update Drinks " \
+            f"set drinkName = '{drink_data['drink_name']}', " \
+            f"calories = {drink_data['calories']}, " \
+            f"fat = {drink_data['fat']}, " \
+            f"protein = {drink_data['protein']}, " \
+            f"carbs = {drink_data['carbs']}, " \
+            f"sugar = {drink_data['sugar']}, " \
+            f"servingWeight = {drink_data['serving_weight']} " \
+            f"where drinkId = {drink_id}"
+    
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+
+def run_advanced_query():
+    query = " (select 'Food', carbs, avg(protein) as avgPro, avg(fat) as avgfat  " \
+            " from Foods " \
+            " where carbs > 49 " \
+            " group by carbs " \
+            " order by carbs " \
+            " limit 10) " \
+            "union" \
+            " (select 'Drink', carbs,avg(protein) as avgPro , avg(fat) as avgfat " \
+            " from Drinks " \
+            " where carbs > 49 " \
+            " group by carbs " \
+            " order by carbs " \
+            " limit 10); " 
+
+    
+    conn = db.connect()
+    query_r = conn.execute(query).fetchall()
+    conn.close()
+    
+
+
+    advanced_results = []
+    for result in query_r:
+        name, carbs, avgPro, avgfat = result
+        advanced_results.append({
+            'type': name,
+            'carbs': carbs,
+            'avgPro': avgPro,
+            'avgfat': avgfat
+        })
+    
+    return advanced_results
+    
+
+    
+
+
+
+
+
