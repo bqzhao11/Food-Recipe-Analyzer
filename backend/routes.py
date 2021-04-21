@@ -116,7 +116,7 @@ def run_adv_query():
     return jsonify(result)
 
 
-@app.route('/recipe/add', methods=['POST'])
+@app.route('/recipe/add', methods=["POST"])
 def add_recipe():
     data = request.get_json()
 
@@ -132,6 +132,42 @@ def add_recipe():
             'success': False,
             'response': 'Something went wrong'
         }
+
+    return jsonify(result)
+
+@app.route('/recipes', methods=['GET'])
+def show_recipe():
+
+    try:
+        recipes = db_helper.show_recipe()
+        result = {
+            'success': True,
+            'response': recipes
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+@app.route('/recipes/<string:recipe_name>', methods=['GET'])
+def get_recipe_name(recipe_name):
+    try:
+        recipe_results = db_helper.get_recipe_name(recipe_name)
+        result = {
+            'success': True,
+            'response': recipe_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
     return jsonify(result)
 
 @app.route('/recipe/update/<int:recipe_id>', methods = ["POST"])
@@ -158,7 +194,7 @@ def delete_recipe(recipe_id):
         db_helper.delete_recipe(recipe_id)
         result = {
             'success': True,
-            'response': f'Deleted {recipe_id} successfully'
+            'response': f'Deleted successfully'
         }
     except Exception as e:
         print(e)
@@ -189,10 +225,10 @@ def search_recipe():
 @app.route('/recipe/search_healthy', methods=['GET'])
 def search_healthy():
     try:
-        query_result = db_helper.search_healthy()
+        healthy_results = db_helper.search_healthy()
         result = {
             'success': True,
-            'response': query_result
+            'response': healthy_results
         }
     except Exception as e:
         print(e)
@@ -206,7 +242,6 @@ def search_healthy():
 @app.route('/user/add', methods = ["POST"])
 def add_user():
     data = request.get_json()
-
     try:
         db_helper.add_user(data)
         result = {
