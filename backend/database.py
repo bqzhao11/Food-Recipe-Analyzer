@@ -118,49 +118,6 @@ def run_adv_query():
     
     return adv_results
 
-def add_recipe(data):
-    query = f'INSERT INTO Recipes(recipeName)'
-            f'VALUES('data['recipe_name']}'
-
-    conn = db.connect()
-    conn.execute(query)
-    conn.close()
-
-def update_recipe(recipe_id):
-    query = f'UPDATE Recipes' \
-            f'SET recipeName = Newrecipe_name' \
-            f'WHERE recipeName = Oldrecipe_name'
-    conn = db.connect()
-    conn.execute(query).fetchall()
-    conn.close()
-
-def delete_recipe(recipe_id):
-    query = f'DELETE FROM Recipes'
-            f'WHERE recipeName = deleteRecipeName'
-    
-    conn = db.connect()
-    conn.execute(query)
-    conn.close()
-
-def search_healthy():
-    query = 'COPY THE ADV SQL INTO HERE'
-
-    
-    conn = db.connect()
-    query_results = conn.execute(query).fetchall()
-    conn.close()
-
-    healthy_results = []
-    for result in query_results:
-        foodName, drinkName, calories, sugar = result
-        healthy_results.append({
-            "foodName": foodName,
-            "drinkName": drinkName,
-            "calories": calories,
-            "sugar": sugar
-        })
-
-    return healthy_results
 
 def add_user(user_data):
     query = f"INSERT INTO User(userName, password, firstName, lastName, email, location) " \
