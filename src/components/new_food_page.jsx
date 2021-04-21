@@ -14,5 +14,4 @@ function NewFoodPage() {
     );
 }
 
-
 export default NewFoodPage;
