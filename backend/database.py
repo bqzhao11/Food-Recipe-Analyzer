@@ -118,46 +118,102 @@ def run_adv_query():
     
     return adv_results
 
-def add_recipe(data):
-    query = f'INSERT INTO Recipes(recipeName)'
-            f'VALUES('data['recipe_name']}'
+def add_recipe(recipe_Info):
+
+    query = f"insert into Recipes(recipeName)" \
+            f"values('{recipe_Info['recipe_name']}'); "
 
     conn = db.connect()
     conn.execute(query)
     conn.close()
 
-def update_recipe(recipe_id):
-    query = f'UPDATE Recipes' \
-            f'SET recipeName = Newrecipe_name' \
-            f'WHERE recipeName = Oldrecipe_name'
+def update_recipe(recipe_id, recipe_data):
+    query = f"update Recipes " \
+            f"set recipeName = ('{recipe_data['recipe_name']}') " \
+            f"where recipeId = ('{recipe_id}');"
+
     conn = db.connect()
-    conn.execute(query).fetchall()
+    query_results = conn.execute(query).fetchall()
     conn.close()
 
 def delete_recipe(recipe_id):
-    query = f'DELETE FROM Recipes'
-            f'WHERE recipeName = deleteRecipeName'
-    
+    query = f'delete from Recipes where recipeId={recipe_id}'
+
     conn = db.connect()
     conn.execute(query)
     conn.close()
 
-def search_healthy():
-    query = 'COPY THE ADV SQL INTO HERE'
+def get_recipe_name(recipe_name):
+    query = f"select * " \
+            f"from Recipes " \
+            f"where recipeName like '%%{recipe_name}%%'; "
+            
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
 
+    recipe_results = []
+    for result in query_results:
+        recipeId, recipeName, userId, dateCreated = result
+        recipe_results.append({
+            "recipeId": recipeId,
+            "recipeName": recipeName,
+            "userId": userId,
+            "dateCreated": dateCreated
+            })
+
+    return recipe_results 
+
+def show_recipe():
+    query = f"select * " \
+            f"from Recipes "
     
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    recipe_results = []
+
+    for result in query_results:
+        recipeId, recipeName, userId, dateCreated = result
+        recipe_results.append({
+            "recipeId" : recipeId,
+            "recipeName" : recipeName,
+            "userId" : userId,
+            "dateCreated" : dateCreated
+        })
+
+    return recipe_results
+
+def search_healthy():
+    query = f"(SELECT foodName, calories, carbs, sugar, protein, fat " \
+            f"FROM Foods " \
+            f"WHERE (calories <= '300' AND sugar <= '15') " \
+            f"group by foodId " \
+            f"order by rand() " \
+            f"limit 8) " \
+            f"UNION " \
+            f"(SELECT drinkName, calories, carbs, sugar, protein, fat " \
+            f"FROM Drinks " \
+            f"WHERE (calories <= '200' AND sugar <= '8') " \
+            f"group by drinkId " \
+            f"order by rand() " \
+            f"limit 7); " 
+
     conn = db.connect()
     query_results = conn.execute(query).fetchall()
     conn.close()
 
     healthy_results = []
     for result in query_results:
-        foodName, drinkName, calories, sugar = result
+        names, calories, carbs, sugar, protein, fat = result
         healthy_results.append({
-            "foodName": foodName,
-            "drinkName": drinkName,
+            "names": names,
             "calories": calories,
-            "sugar": sugar
+            "carbs":carbs,
+            "sugar": sugar,
+            "protein":protein,
+            "fat":fat
         })
 
     return healthy_results
