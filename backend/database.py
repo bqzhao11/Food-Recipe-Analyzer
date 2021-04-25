@@ -119,6 +119,7 @@ def run_adv_query():
     return adv_results
 
 def add_recipe(recipe_Info):
+    
 
     query = f"insert into Recipes(recipeName)" \
             f"values('{recipe_Info['recipe_name']}'); "
