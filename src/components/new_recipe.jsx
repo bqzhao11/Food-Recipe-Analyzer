@@ -4,12 +4,14 @@ import "axios"
 import axios from "axios";
 import RunAdv from "./adv_sql_alex";
 import GetRecipes from "./get_recipe";
+import GetFood from "./get_food";
+import NewRecipeFoodList from "./new_recipe_food_list";
 
 
 function NewRecipe() {
 
     const [recipe, setrecipeNameAdd] = useState("");
-
+    const [foods, setFoods] = useState([]);
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -28,9 +30,14 @@ function NewRecipe() {
         }
     }
 
+    const handleAdd = foodId => {
+        setFoods(foods => [...foods, foodId])
+        console.log(foods)
+    }
+
     return (
         <div>
-            <h4>Add Your recipe here!</h4>
+            <h2>New Recipe:</h2>
             <form onSubmit={handleSubmit}>
                 <input
                 type="text"
@@ -47,6 +54,8 @@ function NewRecipe() {
                 style={{ flex: "1" }}
                 />
             </form>
+            <div><GetFood handleAdd={handleAdd} /></div>
+            <div><NewRecipeFoodList foodList={foods} /></div>
             <div>
                 <GetRecipes />
             </div>
