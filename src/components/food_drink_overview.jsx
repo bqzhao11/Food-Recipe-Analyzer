@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useState} from "react";
 import axios from "axios";
 
 function FoodDrinkOverview() {
@@ -18,11 +18,6 @@ function FoodDrinkOverview() {
             alert("Please enter a valid attribute")
         }
 
-        const req = {
-            attributeName: attributeName,
-            upperBound: upperBound,
-            lowerBound: lowerBound
-        }
 
         axios.get(`/overview/${attributeName}/${upperBound}/${lowerBound}`)
              .then(res => {

@@ -7,14 +7,7 @@ function UpdateRecipe(props) {
     const [recipeName, setRecipeName] = useState('');
 
 
-    useEffect(() => {
-        axios.get(`/recipes/${props.recipeId}`)
-             .then(res => {
-                 if (res.data.success) {
-                    setRecipeName(res.data.response.recipeName);
-                 }
-             })
-    }, []);
+
 
     const handleUpdate = evt => {
         const req = {

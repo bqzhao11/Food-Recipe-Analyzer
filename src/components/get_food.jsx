@@ -3,10 +3,11 @@ import axios from "axios";
 import DeleteFoodButton from "./delete_food_button";
 import UpdateFood from "./update_food"
 import UpdateFoodButton from "./update_food_button"
+import AddFoodButton from "./add_food_button";
 
-function GetFood() {
+function GetFood(props) {
     const [foodName, setFoodName] = useState('');
-    const [limit, setLimit] = useState(0);
+    const [limit, setLimit] = useState(20);
     const [foodResults, setFoodResults] = useState([]);
     const [displayUpdate, setDisplayUpdate] = useState(false);
     const [updateFoodId, setUpdateFoodId] = useState();
@@ -37,7 +38,7 @@ function GetFood() {
 
     return (
         <div>
-            <h2>Get food query</h2>
+            <h4>Add foods:</h4>
             <form onSubmit={handleSubmit}>
                 <label>
                     Food Name: <input type='text'
@@ -64,6 +65,7 @@ function GetFood() {
                         <th>Serving Weight</th>
                         <th>Delete</th>
                         <th>Update</th>
+                        <th>Add</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,6 +81,7 @@ function GetFood() {
                                 <td>{item.servingWeight}</td> 
                                 <td><div onClick={handleSubmit} ><DeleteFoodButton foodId={item.foodId} /></div></td>
                                 <td><UpdateFoodButton foodId={item.foodId} turnOnUpdate={turnOnUpdate}  /></td>
+                                <td>< AddFoodButton foodId = {item.foodId} handleAdd={props.handleAdd} /></td>
                             </tr>
                         ))
                     }
