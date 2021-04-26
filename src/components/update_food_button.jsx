@@ -8,7 +8,7 @@ function UpdateFoodButton(props) {
 
     return (
         <div>
-            <button type="button" value="Update" onClick={handleClick} />
+            <button type="button" value="Update" onClick={handleClick} >Update Food</button>
         </div>
     );
 }

@@ -52,7 +52,7 @@ function GetFood(props) {
                 </label><br />
                 <input type='submit' value='Find Food' />
             </form>
-
+            <h4>Search Results:</h4>
             <table>
                 <thead>
                     <tr>
