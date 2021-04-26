@@ -261,7 +261,7 @@ def delete_recipe(recipe_id):
     return jsonify(result)
 
 @app.route('/recipe/search_recipe/<string:recipe_name>', methods=['GET'])
-def search_recipe():
+def search_recipe(recipe_name):
     try:
         recupe_returns = db_helper.search_recipe(recipe_name)
         result = {

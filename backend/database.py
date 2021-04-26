@@ -85,7 +85,7 @@ def update_food_id(food_id, food_data):
             f"where foodId = {food_id}"
     
     conn = db.connect()
-    query_results = conn.execute(query).fetchall()
+    conn.execute(query).fetchall()
     conn.close()
 
 def run_adv_query():
@@ -164,7 +164,7 @@ def update_recipe(recipe_id, recipe_data):
             f"where recipeId = ('{recipe_id}');"
 
     conn = db.connect()
-    query_results = conn.execute(query).fetchall()
+    conn.execute(query).fetchall()
     conn.close()
 
 def delete_recipe(recipe_id):
