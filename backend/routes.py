@@ -151,6 +151,24 @@ def add_goes_well_with():
         }
 
     return jsonify(result)
+
+@app.route('/uses/add', methods=['POST'])
+def add_uses():
+    data = request.get_json()
+    try:
+        db_helper.add_uses(data)
+        result = {
+            'success': True,
+            'response': 'uses added successfully'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': "Something went wrong"
+        }
+
+    return jsonify(result)
         
 
 @app.route('/recipe/add', methods=["POST"])
@@ -516,7 +534,7 @@ def get_tool_id(tool_id):
     
     return jsonify(result)
 
-@app.route('/tools/<string:tool_name>', methods=['GET'])
+@app.route('/tools/name/<string:tool_name>', methods=['GET'])
 def get_tool_name(tool_name):
 
     try:
