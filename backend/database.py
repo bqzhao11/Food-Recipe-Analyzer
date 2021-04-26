@@ -127,7 +127,6 @@ def add_contains(contains_info):
     conn.close()
 
 def add_goes_well_with(goes_well_with_info):
-    print(goes_well_with_info)
     query = f"insert into GoesWellWith(drinkId, recipeId) " \
             f"values ({goes_well_with_info['drinkId']}, {goes_well_with_info['recipeId']});"
 
@@ -135,6 +134,13 @@ def add_goes_well_with(goes_well_with_info):
     conn.execute(query)
     conn.close()
 
+def add_uses(uses_info):
+    query = f"insert into Uses(toolId, recipeId) " \
+            f"values ({uses_info['toolId']}, {uses_info['recipeId']});"
+    
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
 
 def add_recipe(recipe_Info):
     
@@ -463,10 +469,10 @@ def get_tool_id(tool_id):
     query_results = conn.execute(query).fetchall()
     conn.close()
 
-    toolName = query_results[0]
+    toolName = query_results[0][0]
 
     return {
-        "toolName": toolName,
+        "toolName": toolName
     }
 
 def get_tool_name(tool_name):
@@ -484,7 +490,7 @@ def get_tool_name(tool_name):
         toolId, toolName = result
         tool_results.append({
             "toolId": toolId,
-            "toolName": toolName,
+            "toolName": toolName
         })
 
     return tool_results  

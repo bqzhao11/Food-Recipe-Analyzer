@@ -26,7 +26,7 @@ function GetTool (props) {
     const handleSubmit = e => {
         e.preventDefault();
 
-        axios.get(`/tools/${toolName}`)
+        axios.get(`/tools/name/${toolName}`)
              .then(res => {
                 if (res.data.success) {
                     setToolResults(res.data.response)
