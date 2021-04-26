@@ -15,7 +15,7 @@ function DeleteFoodButton(props) {
 
     return (
         <div>
-            <button type="button" value="Delete" onClick={handleClick} />
+            <button type="button" value="Delete" onClick={handleClick} >Delete Food</button> 
         </div>
     );
 }

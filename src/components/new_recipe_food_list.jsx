@@ -8,32 +8,33 @@ function NewRecipeFoodList (props) {
 
     const [foods, setFoods] = useState([])
 
-
-
-    const fetch = async () => {
-        const res = await axios.get(`/foods/${props.newFood}`);
-        console.log(props.newFood)
-        const newFood = {
-            foodId: props.newFood,
-            foodName: res.data.response.foodName, 
-            calories: res.data.response.calories,
-            fat: res.data.response.data,
-            protein: res.data.response.data,
-            carbs: res.data.response.carbs,
-            sugar: res.data.response.carbs,
-            servingWeight: res.data.response.servingWeight
-        }
-        setFoods(foods => [...foods, newFood])
-        
-    }
-
     useEffect(() => {
-        fetch()
+        if (props.newFood) {
+            axios.get(`/foods/${props.newFood.foodId}`)
+                 .then(res => {
+                    const newFood = {
+                        foodId: props.newFood.foodId,
+                        foodName: res.data.response.foodName, 
+                        calories: res.data.response.calories,
+                        fat: res.data.response.data,
+                        protein: res.data.response.data,
+                        carbs: res.data.response.carbs,
+                        sugar: res.data.response.carbs,
+                        servingWeight: res.data.response.servingWeight,
+                        numServings: props.newFood.numServings
+                    };
+                    setFoods(foods => [...foods, newFood])
+                 })
+                 .catch(err => {
+                     console.log(err)
+                 })
+        }
     }, [props.newFood])
 
 
     return (
         <div>
+            <h3>Added Foods:</h3>
             
             <table>
                 <thead>
@@ -59,6 +60,7 @@ function NewRecipeFoodList (props) {
                                 <td>{item.carbs}</td>
                                 <td>{item.sugar}</td>
                                 <td>{item.servingWeight}</td> 
+                                <td>{item.numServings}</td>
                             </tr>
                         ))
                     }
