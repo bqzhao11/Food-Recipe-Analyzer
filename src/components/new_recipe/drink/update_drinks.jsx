@@ -23,7 +23,7 @@ function UpdateDrinks(p) {
                      setServingWeight(res.data.response.servingWeight);
                  }
              })
-    }, []);
+    }, [p.drinkId]);
 
     const handleSubmit = e => {
 

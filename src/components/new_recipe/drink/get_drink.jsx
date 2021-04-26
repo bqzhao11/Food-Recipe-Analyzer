@@ -39,7 +39,7 @@ function GetDrink(props) {
 
     return (
         <div>
-            <h2>Current Beverages Available </h2>
+            <h4>Add Drinks:</h4>
             <form onSubmit={handleSubmit}>
                 <label>
                     Drink Name: <input type='text'

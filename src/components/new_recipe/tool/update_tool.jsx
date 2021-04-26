@@ -11,7 +11,7 @@ function UpdateTool (props) {
                      setToolName(res.data.response.toolName);
                  }
              })
-    }, []);
+    }, [props.toolId]);
 
     const handleSubmit = e => {
 

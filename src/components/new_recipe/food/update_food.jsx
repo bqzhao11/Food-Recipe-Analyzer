@@ -24,7 +24,7 @@ function UpdateFood(props) {
                      setServingWeight(res.data.response.servingWeight);
                  }
              })
-    }, []);
+    }, [props.foodId]);
 
     const handleSubmit = e => {
 

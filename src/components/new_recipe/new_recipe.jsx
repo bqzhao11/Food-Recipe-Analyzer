@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState} from "react";
+import React, { useState } from "react";
 import "axios"
 import axios from "axios";
 import GetFood from "./food/get_food";
