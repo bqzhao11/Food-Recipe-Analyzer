@@ -40,10 +40,10 @@ function GetTool (props) {
 
     return (
         <div>
-            <h2>Current Beverages Available </h2>
+            <h4>Add Tools:</h4>
             <form onSubmit={handleSubmit}>
                 <label>
-                    Drink Name: <input type='text'
+                    Tool Name: <input type='text'
                                       value={toolName}
                                       onChange={e => setToolName(e.target.value)} />
                 </label><br />
