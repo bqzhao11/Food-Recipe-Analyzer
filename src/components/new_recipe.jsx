@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState} from "react";
 import "axios"
 import axios from "axios";
@@ -12,6 +12,12 @@ function NewRecipe() {
 
     const [recipe, setrecipeNameAdd] = useState("");
     const [foods, setFoods] = useState([]);
+    const [newestAddition, setNewestAddition] = useState();
+
+
+    // useEffect(() => {
+    //     console.log(foods)
+    // })
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -31,8 +37,8 @@ function NewRecipe() {
     }
 
     const handleAdd = foodId => {
+        setNewestAddition(foodId)
         setFoods(foods => [...foods, foodId])
-        console.log(foods)
     }
 
     return (
@@ -55,7 +61,7 @@ function NewRecipe() {
                 />
             </form>
             <div><GetFood handleAdd={handleAdd} /></div>
-            <div><NewRecipeFoodList foodList={foods} /></div>
+            <div><NewRecipeFoodList newFood={newestAddition} /></div>
             <div>
                 <GetRecipes />
             </div>

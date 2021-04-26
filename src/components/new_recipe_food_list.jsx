@@ -1,8 +1,36 @@
-import React, {useState} from "react";
+import axios from "axios";
+import React, {useEffect, useState} from "react";
+
+
+
 
 function NewRecipeFoodList (props) {
 
-    
+    const [foods, setFoods] = useState([])
+
+
+
+    const fetch = async () => {
+        const res = await axios.get(`/foods/${props.newFood}`);
+        console.log(props.newFood)
+        const newFood = {
+            foodId: props.newFood,
+            foodName: res.data.response.foodName, 
+            calories: res.data.response.calories,
+            fat: res.data.response.data,
+            protein: res.data.response.data,
+            carbs: res.data.response.carbs,
+            sugar: res.data.response.carbs,
+            servingWeight: res.data.response.servingWeight
+        }
+        setFoods(foods => [...foods, newFood])
+        
+    }
+
+    useEffect(() => {
+        fetch()
+    }, [props.newFood])
+
 
     return (
         <div>
@@ -22,7 +50,7 @@ function NewRecipeFoodList (props) {
                 </thead>
                 <tbody>
                     {
-                        props.foodList.map(item => (
+                        foods.map(item => (
                             <tr key={item.foodId}>
                                 <td>{item.foodName}</td>
                                 <td>{item.calories}</td>
