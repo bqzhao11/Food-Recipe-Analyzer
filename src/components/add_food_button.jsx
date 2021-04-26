@@ -9,7 +9,7 @@ function AddFoodButton (props) {
 
     const handleClick = e => {
         e.preventDefault(e)
-        props.handleAdd(props.foodId, numServings);
+        props.handleAddFood(props.foodId, numServings);
     }
 
     return (
