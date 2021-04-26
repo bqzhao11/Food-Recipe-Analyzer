@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./components/dashboard";
-import  NewDrinkPage from "./components/new_drink_page"
+import NewDrinkPage from "./components/new_drink_page"
 import Home from "./components/home";
 import Login from "./components/login";
-import NewRecipe from "./components/new_recipe";
+import NewRecipe from "./components/new_recipe/new_recipe";
 import NewUserPage from "./components/new_user_page";
 import NewFoodPage from "./components/new_food_page";
 import UpdatePassword from "./components/update_password";
-import FoodDrinkOverview from "./components/food_drink_overview";
+import FoodDrinkOverview from "./components/adv_query/food_drink_overview";
 import './App.css';
 
 function App() {

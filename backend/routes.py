@@ -479,8 +479,97 @@ def run_advanced_query():
 
     return jsonify(result) 
 
-    
+@app.route('/tools/add', methods=["POST"])
+def add_tool():
+    data = request.get_json()
 
+    try:
+        db_helper.add_tool(data)
+        result = {
+            'success': True,
+            'response': 'Tool added'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
+
+@app.route('/tools/<int:tool_id>', methods=['GET'])
+def get_tool_id(tool_id):
+
+    try:
+        tool_results = db_helper.get_tool_id(tool_id)
+        result = {
+            'success': True,
+            'response': tool_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+@app.route('/tools/<string:tool_name>', methods=['GET'])
+def get_tool_name(tool_name):
+
+    try:
+        tool_results = db_helper.get_tool_name(tool_name)
+        result = {
+            'success': True,
+            'response': tool_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+@app.route('/tools/update/<int:tool_id>', methods=['POST'])
+def update_tool_id(tool_id):
+    data = request.get_json()
+
+    try:
+        db_helper.update_tool_id(tool_id, data)
+        result = {
+            'success': True,
+            'response': f'Updated {tool_id} successfully'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
+
+@app.route('/tools/delete/<int:tool_id>', methods=['POST'])
+def delete_tool_id(tool_id):
+    try:
+        db_helper.delete_tool_id(tool_id)
+        result = {
+            'success': True,
+            'response': f'Deleted {tool_id} successfully'
+        }
+    
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
 
 
 

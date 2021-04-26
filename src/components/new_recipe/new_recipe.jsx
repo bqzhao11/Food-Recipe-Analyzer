@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { useState} from "react";
 import "axios"
 import axios from "axios";
-import GetFood from "./get_food";
-import NewRecipeFoodList from "./new_recipe_food_list";
-import GetDrink from "./get_drink";
-import NewRecipeDrinkList from "./new_recipe_drink_list";
+import GetFood from "./food/get_food";
+import NewRecipeFoodList from "./food/new_recipe_food_list";
+import GetDrink from "./drink/get_drink";
+import NewRecipeDrinkList from "./drink/new_recipe_drink_list";
+import GetTool from "./tool/get_tool";
+import NewRecipeToolList from "./tool/new_recipe_tool_list";
 
 
 function NewRecipe() {
@@ -45,13 +47,21 @@ function NewRecipe() {
                 drinkId: drinks[i],
                 recipeId: res.data.response
             }
-            console.log(req)
 
             const goes_well_with_res = await axios.post('/goes-well-with/add', req)
             console.log(goes_well_with_res)
 
         }
 
+        for (i = 0; i < tools.length; i++) {
+            const req = {
+                toolId: tools[i],
+                recipeId: res.data.response
+            }
+
+            const uses_req = await axios.post('/uses/add', req)
+            console.log(uses_req)
+        }
     }
 
 
@@ -71,9 +81,13 @@ function NewRecipe() {
     }
 
     const handleAddDrink = drinkId => {
-        console.log(drinkId)
         setNewestDrinkAddition(drinkId)
         setDrinks(drinks => [...drinks, drinkId])
+    }
+
+    const handleAddTool = toolId => {
+        setNewestToolsAddition(toolId)
+        setTools(tools => [...tools, toolId])
     }
 
     return (
@@ -100,6 +114,9 @@ function NewRecipe() {
 
             <div><GetDrink handleAddDrink={handleAddDrink} /></div>
             <div><NewRecipeDrinkList newDrink={newestDrinkAddition} /></div>
+
+            <div><GetTool handleAddTool={handleAddTool} /></div>
+            <div><NewRecipeToolList newTool={newestToolsAddition} /></div>
             
         </div>
     );
