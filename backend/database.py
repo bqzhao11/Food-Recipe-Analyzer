@@ -444,11 +444,65 @@ def run_advanced_query():
         })
     
     return advanced_results
+
+def add_tool(tool_data):
+    query = f"insert into Tools(toolName) " \
+            f"values ('{tool_data['tool_name']}'); " \
+
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def get_tool_id(tool_id):
+
+    query = f"select toolName " \
+            f"from Tools " \
+            f"where toolId = {tool_id}"
+
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    toolName = query_results[0]
+
+    return {
+        "toolName": toolName,
+    }
+
+def get_tool_name(tool_name):
     
+    query = f"select toolId, toolName " \
+            f"from Tools " \
+            f"where toolName like '%%{tool_name}%%' " \
+            
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
 
+    tool_results = []
+    for result in query_results:
+        toolId, toolName = result
+        tool_results.append({
+            "toolId": toolId,
+            "toolName": toolName,
+        })
+
+    return tool_results  
+
+def delete_tool_id(tool_id):
+    query = f'delete from Tools where toolId={tool_id}'
+
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def update_tool_id(tool_id, tool_data):
+    query = f"update Tools " \
+            f"set drinkName = '{tool_data['tool_name']}' " \
+            f"where drinkId = {tool_id}"
     
-
-
-
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
 
 

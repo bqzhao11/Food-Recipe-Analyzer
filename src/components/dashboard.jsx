@@ -1,6 +1,6 @@
 import React from "react";
 import GetRecipes from "./get_recipe";
-import RunAdv from "./adv_sql_alex"
+import RunAdv from "./adv_query/adv_sql_alex"
 
 
 function Dashboard() {
