@@ -13,30 +13,44 @@ function NewRecipe() {
     const [newestAddition, setNewestAddition] = useState();
 
 
-    const handleSubmit = (evt) => {
-        evt.preventDefault();
-        if (recipe === '') {
-            alert('Please Enter a Recipe!');
-        } else {
-            alert(`Recipe ${recipe} was added!`);
-            const req = {recipe_name : recipe};
-            axios.post('/recipe/add', req)
-                .then(res => {
-                    console.log(res)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+    const addRecipe = async () => {
+        const req = {
+            recipe_name : recipe,
+            user_id: 1 // TODO: make this the current logged-in user
+        }; 
+        const res = await axios.post('/recipe/add', req)
+
+        if (!res.data.success) {
+            throw new Error(res.data.response)
         }
+        
+        for (var i = 0; i < foods.length; i++) {
+            const req = {
+                foodId : foods[i].foodId,
+                recipeId: res.data.response,
+                numServings : foods[i].numServings
+            }
+            const contains_res = await axios.post('/contains/add', req)
+            console.log(contains_res)
+        }
+
+    }
+
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault(evt);
+        addRecipe().catch(err => console.log(err))
+
     }
 
     const handleAdd = (foodId, numServings) => {
         console.log("reached here")
-        setNewestAddition({
-            foodId: foodId, 
+        const newFood = {
+            foodId: foodId,
             numServings: numServings
-        });
-        setFoods(foods => [...foods, foodId]);
+        }
+        setNewestAddition(newFood);
+        setFoods(foods => [...foods, newFood]);
     }
 
     return (

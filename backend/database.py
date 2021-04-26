@@ -118,15 +118,29 @@ def run_adv_query():
     
     return adv_results
 
-def add_recipe(recipe_Info):
-    
-
-    query = f"insert into Recipes(recipeName)" \
-            f"values('{recipe_Info['recipe_name']}'); "
+def add_contains(contains_info):
+    query = f"insert into Contains(foodId, recipeId, numberOfServings) " \
+            f"values ({contains_info['foodId']}, {contains_info['recipeId']}, {contains_info['numServings']});"
 
     conn = db.connect()
     conn.execute(query)
     conn.close()
+
+def add_recipe(recipe_Info):
+    
+
+    query = f"insert into Recipes(recipeName, userId) " \
+            f"values('{recipe_Info['recipe_name']}', {recipe_Info['user_id']}); "
+
+    conn = db.connect()
+    conn.execute(query)
+
+    query= f"select last_insert_id();"
+    result = conn.execute(query).fetchall()
+
+    conn.close()
+
+    return result[0][0]
 
 def update_recipe(recipe_id, recipe_data):
     query = f"update Recipes " \
