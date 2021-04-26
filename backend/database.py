@@ -126,6 +126,16 @@ def add_contains(contains_info):
     conn.execute(query)
     conn.close()
 
+def add_goes_well_with(goes_well_with_info):
+    print(goes_well_with_info)
+    query = f"insert into GoesWellWith(drinkId, recipeId) " \
+            f"values ({goes_well_with_info['drinkId']}, {goes_well_with_info['recipeId']});"
+
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+
 def add_recipe(recipe_Info):
     
 

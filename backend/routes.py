@@ -134,6 +134,25 @@ def add_contains():
 
     return jsonify(result)
 
+@app.route('/goes-well-with/add', methods=['POST'])
+def add_goes_well_with():
+    data = request.get_json()
+    try:
+        db_helper.add_goes_well_with(data)
+        result = {
+            'success': True,
+            'response': 'goes well with successfully'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': "Something went wrong"
+        }
+
+    return jsonify(result)
+        
+
 @app.route('/recipe/add', methods=["POST"])
 def add_recipe():
     data = request.get_json()

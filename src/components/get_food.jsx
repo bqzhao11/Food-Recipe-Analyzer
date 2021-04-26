@@ -81,7 +81,7 @@ function GetFood(props) {
                                 <td>{item.servingWeight}</td> 
                                 <td><div onClick={handleSubmit} ><DeleteFoodButton foodId={item.foodId} /></div></td>
                                 <td><UpdateFoodButton foodId={item.foodId} turnOnUpdate={turnOnUpdate}  /></td>
-                                <td>< AddFoodButton foodId = {item.foodId} handleAdd={props.handleAdd} /></td>
+                                <td>< AddFoodButton foodId = {item.foodId} handleAddFood={props.handleAddFood} /></td>
                             </tr>
                         ))
                     }

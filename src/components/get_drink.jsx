@@ -3,10 +3,11 @@ import axios from "axios";
 import DeleteDrinkButton from "./delete_drink_button";
 import UpdateDrink from "./update_drinks"
 import UpdateDrinkButton from "./update_drink_button"
+import AddDrinkButton from "./add_drink_button";
 
-function GetDrink() {
+function GetDrink(props) {
     const [drinkName, setDrinkName] = useState('');
-    const [limit, setLimit] = useState(0);
+    const [limit, setLimit] = useState(10);
     const [drinkResults, setDrinkResults] = useState([]);
     const [displayUpdate, setDisplayUpdate] = useState(false);
     const [updateDrinkId, setUpdateDrinkId] = useState();
@@ -65,6 +66,7 @@ function GetDrink() {
                         <th>Serving Weight</th>
                         <th>Delete</th>
                         <th>Update</th>
+                        <th>Add</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,6 +82,7 @@ function GetDrink() {
                                 <td>{item.servingWeight}</td> 
                                 <td><div onClick={handleSubmit} ><DeleteDrinkButton drinkId={item.drinkId} /></div></td>
                                 <td><UpdateDrinkButton drinkId={item.drinkId} turnOnUpdate={turnOnUpdate}  /></td>
+                                <td><AddDrinkButton drinkId={item.drinkId} handleAddDrink={props.handleAddDrink} /></td>
                             </tr>
                         ))
                     }

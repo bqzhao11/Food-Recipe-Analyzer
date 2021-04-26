@@ -8,7 +8,7 @@ function UpdatedrinkButton(p) {
 
     return (
         <div>
-            <button type="button" value="Update" onClick={handleClick} />
+            <button type="button" value="Update" onClick={handleClick} >Update Drink</button>
         </div>
     );
 }
