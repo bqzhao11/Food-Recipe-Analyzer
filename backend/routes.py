@@ -115,16 +115,34 @@ def run_adv_query():
 
     return jsonify(result)
 
+@app.route('/contains/add', methods=['POST'])
+def add_contains():
+    data = request.get_json()
+
+    try:
+        db_helper.add_contains(data)
+        result = {
+            'success': True,
+            'response': 'contains added successfully'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
 
 @app.route('/recipe/add', methods=["POST"])
 def add_recipe():
     data = request.get_json()
 
     try:
-        db_helper.add_recipe(data)
+        last_inserted_index = db_helper.add_recipe(data)
         result = {
             'success': True,
-            'response': 'Recipe added'
+            'response': last_inserted_index 
         }
     except Exception as e:
         print(e)

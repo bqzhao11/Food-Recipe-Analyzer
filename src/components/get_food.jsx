@@ -7,7 +7,7 @@ import AddFoodButton from "./add_food_button";
 
 function GetFood(props) {
     const [foodName, setFoodName] = useState('');
-    const [limit, setLimit] = useState(20);
+    const [limit, setLimit] = useState(10);
     const [foodResults, setFoodResults] = useState([]);
     const [displayUpdate, setDisplayUpdate] = useState(false);
     const [updateFoodId, setUpdateFoodId] = useState();
