@@ -401,6 +401,26 @@ def get_user(user_name):
 
     return user_results
 
+def auth_user(username, password):
+    query = f"select * from User where userName = '{username}' and password = '{password}';"
+
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    if query_results:
+        userId, userName, password, firstName, lastName, email, location = query_results[0]
+        return {
+            'userId': userId,
+            'username': userName,
+            'firstName': firstName,
+            'lastName': lastName,
+            'email': email,
+            'location': location
+        }
+    else:
+        return None
+
 def delete_user(user_id):
     query = f"DELETE FROM User WHERE userId={user_id}"
     conn = db.connect()

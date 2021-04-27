@@ -446,6 +446,30 @@ def get_user(user_name):
     
     return jsonify(result)
 
+
+@app.route('/user/<string:username>/<string:password>', methods = ["GET"])
+def auth_user(username, password):
+    try:
+        user_results = db_helper.auth_user(username, password) 
+        if user_results:
+            result = {
+                'success': True,
+                'response': user_results
+            }
+        else:
+            result = {
+                'success': False,
+                'response': 'incorrect username or password'
+            }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
+
 @app.route('/user/delete/<int:user_id>', methods = ["POST"])
 def delete_user(user_id):
     data = request.get_json()
