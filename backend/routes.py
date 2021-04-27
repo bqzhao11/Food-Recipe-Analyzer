@@ -261,6 +261,23 @@ def show_recipe():
     
     return jsonify(result)
 
+@app.route('/recipes/user/<int:user_id>', methods=["GET"])
+def get_recipe_by_user_id(user_id):
+    try:
+        recipe_results = db_helper.get_recipe_by_user_id(user_id)
+        result = {
+            'success': True,
+            'response': recipe_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+
+    return jsonify(result)
+
 @app.route('/recipes/<string:recipe_name>', methods=['GET'])
 def get_recipe_name(recipe_name):
     try:
@@ -442,6 +459,24 @@ def get_user(user_name):
         result = {
             'success': False,
             'response': 'Something went wrong'
+        }
+    
+    return jsonify(result)
+
+
+@app.route('/user/id/<int:user_id>', methods=['GET'])
+def get_user_id(user_id):
+    try:
+        user_results = db_helper.get_user_id(user_id)
+        result = {
+            'success': True,
+            'response': user_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'reponse': 'something went wrong'
         }
     
     return jsonify(result)
