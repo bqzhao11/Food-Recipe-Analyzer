@@ -126,9 +126,23 @@ def add_contains(contains_info):
     conn.execute(query)
     conn.close()
 
+def delete_contains(contains_info):
+    query = f"delete from Contains where recipeId = {contains_info['recipeId']} and foodId = {contains_info['foodId']};"
+
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
 def add_goes_well_with(goes_well_with_info):
     query = f"insert into GoesWellWith(drinkId, recipeId) " \
             f"values ({goes_well_with_info['drinkId']}, {goes_well_with_info['recipeId']});"
+
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def delete_goes_well_with(goes_well_with_info):
+    query = f"delete from GoesWellWith where recipeId = {goes_well_with_info['recipeId']} and drinkId = {goes_well_with_info['drinkId']};"
 
     conn = db.connect()
     conn.execute(query)
@@ -138,6 +152,13 @@ def add_uses(uses_info):
     query = f"insert into Uses(toolId, recipeId) " \
             f"values ({uses_info['toolId']}, {uses_info['recipeId']});"
     
+    conn = db.connect()
+    conn.execute(query)
+    conn.close()
+
+def delete_uses(uses_info):
+    query = f"delete from Uses where recipeId = {uses_info['recipeId']} and toolId = {uses_info['toolId']};"
+
     conn = db.connect()
     conn.execute(query)
     conn.close()
