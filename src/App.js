@@ -10,27 +10,40 @@ import UpdatePassword from "./components/update_password";
 import FoodDrinkOverview from "./components/adv_query/food_drink_overview";
 import './App.css';
 import ShowRecipe from "./components/show_recipe";
+import { PrivateRoute, ProvideAuth } from "./components/auth";
 
 function App() {
     return (
-        <Router>
-            <div>
-                {/* A <Switch> looks through its children <Route>s and
-                renders the first one that matches the current URL. */}
-                <Switch>
-                    <Route path="/login" component={Login} />
-                    <Route path="/drink" component={NewDrinkPage} />
-                    <Route path="/show-recipe/:recipeId" component={ShowRecipe} />
-                    <Route path="/new-user" component={NewUserPage} />
-                    <Route path="/dashboard" component={Dashboard} />
-                    <Route path="/new-recipe" component={NewRecipe} />
-                    <Route path="/new-food" component={NewFoodPage} />
-                    <Route path="/update-password" component={UpdatePassword} />
-                    <Route path="/overview" component={FoodDrinkOverview} />
-                    <Route path="/" component={Home} />
-                </Switch>
-            </div>
-        </Router >
+        <ProvideAuth>
+            <Router>
+                <div>
+                    {/* A <Switch> looks through its children <Route>s and
+                    renders the first one that matches the current URL. */}
+                    <Switch>
+                        <Route path="/login" component={Login} />
+                        <PrivateRoute path="/drink">
+                            <NewDrinkPage />
+                        </PrivateRoute>
+                        <PrivateRoute path="/show-recipe/:recipeId" >
+                            <ShowRecipe />
+                        </PrivateRoute>
+                        <Route path="/new-user" component={NewUserPage} />
+                        <PrivateRoute path="/dashboard" >
+                            <Dashboard />
+                        </PrivateRoute>
+                        <PrivateRoute path="/new-recipe" >
+                            <NewRecipe />
+                        </PrivateRoute>
+                        <PrivateRoute path="/new-food" >
+                            <NewFoodPage />
+                        </PrivateRoute>
+                        <Route path="/update-password" component={UpdatePassword} />
+                        <Route path="/overview" component={FoodDrinkOverview} />
+                        <Route path="/" component={Home} />
+                    </Switch>
+                </div>
+            </Router >
+        </ProvideAuth>
     )
 
 }
