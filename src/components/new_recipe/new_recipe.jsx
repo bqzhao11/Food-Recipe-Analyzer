@@ -7,9 +7,13 @@ import GetDrink from "./drink/get_drink";
 import NewRecipeDrinkList from "./drink/new_recipe_drink_list";
 import GetTool from "./tool/get_tool";
 import NewRecipeToolList from "./tool/new_recipe_tool_list";
+import { useAuth } from "../auth";
+import { useHistory } from "react-router";
 
 
 function NewRecipe() {
+    let auth = useAuth();
+    let history = useHistory();
 
     const [recipe, setrecipeNameAdd] = useState("");
     const [foods, setFoods] = useState([]);
@@ -23,7 +27,7 @@ function NewRecipe() {
     const addRecipe = async () => {
         const req = {
             recipe_name : recipe,
-            user_id: 1 // TODO: make this the current logged-in user
+            user_id: auth.user // TODO: make this the current logged-in user
         }; 
         const res = await axios.post('/recipe/add', req)
 
@@ -89,6 +93,15 @@ function NewRecipe() {
         setTools(tools => [...tools, toolId])
     }
 
+    const handleNewFood = e => {
+        history.push('/new-food')
+    }
+
+    const handleNewDrink = e => {
+        history.push('/new-drink')
+    }
+
+
     return (
         <div>
             <h2>New Recipe:</h2>
@@ -116,6 +129,8 @@ function NewRecipe() {
 
             <div><GetTool handleAddTool={handleAddTool} /></div>
             <div><NewRecipeToolList newTool={newestToolsAddition} /></div>
+            <div><button onClick={handleNewFood}>Create New Food</button></div>
+            <div><button onClick={handleNewDrink}>Create New Drink</button></div>
             
         </div>
     );

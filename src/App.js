@@ -21,7 +21,7 @@ function App() {
                     renders the first one that matches the current URL. */}
                     <Switch>
                         <Route path="/login" component={Login} />
-                        <PrivateRoute path="/drink">
+                        <PrivateRoute path="/new-drink">
                             <NewDrinkPage />
                         </PrivateRoute>
                         <PrivateRoute path="/show-recipe/:recipeId" >
