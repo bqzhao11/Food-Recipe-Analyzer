@@ -225,6 +225,70 @@ def get_recipe_name(recipe_name):
     
     return jsonify(result)
 
+@app.route('/recipes/id/<int:recipe_id>', methods=['GET'])
+def get_recipe_id(recipe_id):
+    try:
+        recipe_results = db_helper.get_recipe_id(recipe_id)
+        result = {
+            'success': True,
+            'response': recipe_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    return jsonify(result)
+
+@app.route('/recipes/<int:recipe_id>/foods', methods=['GET'])
+def get_recipe_foods(recipe_id):
+    try:
+        recipe_results = db_helper.get_recipe_foods(recipe_id)
+        result = {
+            'success': True,
+            'response': recipe_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    return jsonify(result)
+    
+@app.route('/recipes/<int:recipe_id>/drinks', methods=['GET'])
+def get_recipe_drinks(recipe_id):
+    try:
+        recipe_results = db_helper.get_recipe_drinks(recipe_id)
+        result = {
+            'success': True,
+            'response': recipe_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    return jsonify(result)
+
+@app.route('/recipes/<int:recipe_id>/tools', methods=['GET'])
+def get_recipe_tools(recipe_id):
+    try:
+        recipe_results = db_helper.get_recipe_tools(recipe_id)
+        result = {
+            'success': True,
+            'response': recipe_results
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    return jsonify(result)
+
 @app.route('/recipe/update/<int:recipe_id>', methods = ["POST"])
 def update_recipe(recipe_id):
     data = request.get_json()
