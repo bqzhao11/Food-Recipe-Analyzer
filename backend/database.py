@@ -195,6 +195,103 @@ def get_recipe_name(recipe_name):
 
     return recipe_results 
 
+def get_recipe_id(recipe_id):
+    query = f"select * " \
+            f"from Recipes " \
+            f"where recipeId = {recipe_id};"
+
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    recipeId, recipeName, userId, dateCreated = query_results[0]
+
+    result = {
+        'recipeId': recipeId,
+        'recipeName': recipeName,
+        'userId': userId,
+        'dateCreated': dateCreated
+    }
+
+    return result
+
+
+def get_recipe_foods(recipe_id):
+
+    query = f"select foodId, foodName, calories, fat, protein, carbs, sugar, servingWeight, numberOfServings " \
+            f"from Foods natural join Contains " \
+            f"where recipeId = {recipe_id}"
+    
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    results = []
+
+    for result in query_results:
+        foodId, foodName, calories, fat, protein, carbs, sugar, servingWeight, numberOfServings = result
+        results.append({
+            'foodId': foodId,
+            'foodName': foodName,
+            'calories': calories,
+            'fat': fat,
+            'protein': protein,
+            'carbs': carbs,
+            'sugar': sugar,
+            'servingWeight': servingWeight,
+            'numberOfServings': numberOfServings
+        })
+    
+    return results
+
+
+def get_recipe_drinks(recipe_id):
+    query = f"select drinkId, drinkName, calories, fat, protein, carbs, sugar, servingWeight " \
+            f"from Drinks natural join GoesWellWith " \
+            f"where recipeId = {recipe_id}"
+    
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    results = []
+
+    for result in query_results:
+        drinkId, drinkName, calories, fat, protein, carbs, sugar, servingWeight = result
+        results.append({
+            'drinkId': drinkId,
+            'drinkName': drinkName,
+            'calories': calories,
+            'fat': fat,
+            'protein': protein,
+            'carbs': carbs,
+            'sugar': sugar,
+            'servingWeight': servingWeight
+        })
+    
+    return results
+
+def get_recipe_tools(recipe_id):
+    query = f"select toolId, toolName " \
+            f"from Tools natural join Uses " \
+            f"where recipeId = {recipe_id}"
+    
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    results = []
+
+    for result in query_results:
+        toolId, toolName = result
+        results.append({
+            'toolId': toolId,
+            'toolName': toolName,
+        })
+    
+    return results
+
+
 def show_recipe():
     query = f"select * " \
             f"from Recipes "

@@ -4,11 +4,13 @@ import "axios"
 import axios from "axios";
 import UpdateRecipe from "./update_recipe_page";
 import DeleteRecipes from "./delete_recipe_page";
+import ShowRecipe from "./show_recipe";
+import ShowRecipeButton from "./show_recipe_button"
 
 function GetRecipes() {
 
     const [searchTerm, setSearchTerm] = useState("");
-    const [showrecipe, setShowRecipe] = React.useState([]);
+    const [showrecipe, setShowRecipe] = useState([]);
 
     useEffect(() => {
         axios.get(`/recipes`)
@@ -50,6 +52,7 @@ function GetRecipes() {
                         <tr>
                             <th>Recipe Name</th>
                             <th>Date Created</th>
+                            <th>Show</th>
                             <th>Delete</th>
                             <th>Update</th>
                         </tr>
@@ -59,8 +62,8 @@ function GetRecipes() {
                             <tr key={item.recipeId}>
                                 <td>{item.recipeName}</td>
                                 <td>{item.dateCreated}</td> 
+                                <td><ShowRecipeButton recipeId={item.recipeId} /></td>
                                 <td><div onClick={handelSearch} ><DeleteRecipes recipeId={item.recipeId} /></div></td>
-                                <td><UpdateRecipe recipeId={item.recipeId} /></td>
                             </tr>
                         ))
                         }

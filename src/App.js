@@ -9,6 +9,7 @@ import NewFoodPage from "./components/new_food_page";
 import UpdatePassword from "./components/update_password";
 import FoodDrinkOverview from "./components/adv_query/food_drink_overview";
 import './App.css';
+import ShowRecipe from "./components/show_recipe";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Switch>
                     <Route path="/login" component={Login} />
                     <Route path="/drink" component={NewDrinkPage} />
+                    <Route path="/show-recipe/:recipeId" component={ShowRecipe} />
                     <Route path="/new-user" component={NewUserPage} />
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/new-recipe" component={NewRecipe} />
