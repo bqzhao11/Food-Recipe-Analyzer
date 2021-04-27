@@ -236,6 +236,26 @@ def get_recipe_id(recipe_id):
 
     return result
 
+def get_recipe_by_user_id(user_id):
+    query = f"select * from Recipes where userId = {user_id};"
+
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    results = []
+    
+    for result in query_results:
+        recipeId, recipeName, userId, dateCreated = result
+        results.append({
+            'recipeId': recipeId,
+            'recipeName': recipeName,
+            'userId': userId,
+            'dateCreated': dateCreated
+        })
+    
+    return results
+
 
 def get_recipe_foods(recipe_id):
 
@@ -400,6 +420,24 @@ def get_user(user_name):
         })
 
     return user_results
+
+def get_user_id(user_id):
+    query = f"select * from User where userId = {user_id};"
+
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    userId, userName, password, firstName, lastName, email, location = query_results[0]
+
+    return {
+        'userId': userId,
+        'username': userName,
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'location': location
+    }
 
 def auth_user(username, password):
     query = f"select * from User where userName = '{username}' and password = '{password}';"

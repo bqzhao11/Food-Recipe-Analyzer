@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 import { useAuth } from "./auth";
 
 
@@ -7,7 +7,6 @@ import { useAuth } from "./auth";
 
 function Login() {
     let history = useHistory();
-    let location = useLocation();
     let auth = useAuth();
 
     const [username, setUsername] = useState('')

@@ -4,14 +4,14 @@ import { useAuth } from "./auth";
 
 
 
-function LogoutButton() {
+function LogoutButton(props) {
     let history = useHistory();
     let auth = useAuth();
 
 
     return (
         <h2>
-            Welcome {auth.user}
+            Welcome {props.firstName} {props.lastName} <br />   
             <button 
                 onClick={() => {
                     auth.signout(() => history.push('/login'))

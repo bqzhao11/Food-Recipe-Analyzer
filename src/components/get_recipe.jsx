@@ -5,13 +5,13 @@ import axios from "axios";
 import DeleteRecipes from "./delete_recipe_page";
 import ShowRecipeButton from "./show_recipe_button"
 
-function GetRecipes() {
+function GetRecipes(props) {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [showrecipe, setShowRecipe] = useState([]);
 
     useEffect(() => {
-        axios.get(`/recipes`)
+        axios.get(`/recipes/user/${props.userId}`)
              .then(res => {
                  if (res.data.success) {
                     setShowRecipe(res.data.response);
