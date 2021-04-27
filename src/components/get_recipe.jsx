@@ -4,8 +4,10 @@ import "axios"
 import axios from "axios";
 import DeleteRecipes from "./delete_recipe_page";
 import ShowRecipeButton from "./show_recipe_button"
+import { useAuth } from "./auth";
 
 function GetRecipes(props) {
+    let auth = useAuth();
 
     const [searchTerm, setSearchTerm] = useState("");
     const [showrecipe, setShowRecipe] = useState([]);

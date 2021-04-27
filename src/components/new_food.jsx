@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "axios"
 import axios from "axios";
+import { useAuth } from "./auth";
 
 
 function NewFood() {
+    let auth = useAuth()
 
     const [foodName, setFoodName] = useState('');
     const [calories, setCalories] = useState('');
@@ -12,7 +14,6 @@ function NewFood() {
     const [carbs, setCarbs] = useState('');
     const [sugar, setSugar] = useState('');
     const [servingWeight, setServingWeight] = useState('');
-    const [userId, setUserId] = useState('');
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -28,9 +29,8 @@ function NewFood() {
             carbs: parseFloat(carbs),
             sugar: parseFloat(sugar),
             serving_weight: parseFloat(servingWeight),
-            user_id: parseInt(userId)
-        }
-        
+            user_id: auth.user 
+        } 
         axios.post('/foods/add', req)
              .then(res => {
                  console.log(res)
@@ -86,12 +86,6 @@ function NewFood() {
                                            onChange={e => setServingWeight(e.target.value)}
                                            placeholder="Serving Weight (g)" />
                 </label><br />
-                <label>
-                    User ID: <input type='text' 
-                                    value={userId} 
-                                    onChange={e => setUserId(e.target.value)}
-                                    placeholder="User ID" />
-                </label><br/>
                 <input type="submit" value="Add Food" />
             </form>
         </div>
