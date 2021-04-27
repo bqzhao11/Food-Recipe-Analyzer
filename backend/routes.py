@@ -134,6 +134,24 @@ def add_contains():
 
     return jsonify(result)
 
+@app.route('/contains/delete', methods=['POST'])
+def delete_contains():
+    data = request.get_json()
+
+    try:
+        db_helper.delete_contains(data)
+        result = {
+            'success': True,
+            'response': 'contains successfully deleted'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    return jsonify(result)
+
 @app.route('/goes-well-with/add', methods=['POST'])
 def add_goes_well_with():
     data = request.get_json()
@@ -150,6 +168,24 @@ def add_goes_well_with():
             'response': "Something went wrong"
         }
 
+    return jsonify(result)
+
+@app.route('/goes-well-with/delete', methods=['POST'])
+def delete_goes_well_with():
+    data = request.get_json()
+
+    try:
+        db_helper.delete_goes_well_with(data)
+        result = {
+            'success': True,
+            'response': 'contains successfully deleted'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
     return jsonify(result)
 
 @app.route('/uses/add', methods=['POST'])
@@ -169,7 +205,24 @@ def add_uses():
         }
 
     return jsonify(result)
-        
+
+@app.route('/uses/delete', methods=['POST'])
+def delete_uses():
+    data = request.get_json()
+
+    try:
+        db_helper.delete_uses(data)
+        result = {
+            'success': True,
+            'response': 'contains successfully deleted'
+        }
+    except Exception as e:
+        print(e)
+        result = {
+            'success': False,
+            'response': 'Something went wrong'
+        }
+    return jsonify(result) 
 
 @app.route('/recipe/add', methods=["POST"])
 def add_recipe():

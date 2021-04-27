@@ -14,7 +14,7 @@ function UpdateRecipe(props) {
             recipe_name: recipeName
         }
         
-        axios.post(`recipe/update/${props.recipeId}`, req)
+        axios.post(`/recipe/update/${props.recipeId}`, req)
              .then(res => {
                  console.log(res);
              })

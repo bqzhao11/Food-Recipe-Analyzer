@@ -2,9 +2,7 @@ import React from "react";
 import { useState, useEffect} from "react";
 import "axios"
 import axios from "axios";
-import UpdateRecipe from "./update_recipe_page";
 import DeleteRecipes from "./delete_recipe_page";
-import ShowRecipe from "./show_recipe";
 import ShowRecipeButton from "./show_recipe_button"
 
 function GetRecipes() {
@@ -54,7 +52,6 @@ function GetRecipes() {
                             <th>Date Created</th>
                             <th>Show</th>
                             <th>Delete</th>
-                            <th>Update</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +60,7 @@ function GetRecipes() {
                                 <td>{item.recipeName}</td>
                                 <td>{item.dateCreated}</td> 
                                 <td><ShowRecipeButton recipeId={item.recipeId} /></td>
-                                <td><div onClick={handelSearch} ><DeleteRecipes recipeId={item.recipeId} /></div></td>
+                                <td><DeleteRecipes recipeId={item.recipeId} /></td>
                             </tr>
                         ))
                         }
