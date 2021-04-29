@@ -21,12 +21,12 @@ function RunAdv() {
 
     return (
         <div>
-            <button onClick={handleHealthyFood} value="Search!" />
                 <h4>Can't Decide? Press The Button To See 15 Random Selection Of Healthy Foods</h4>
+                <button onClick={handleHealthyFood} value="Search!" />
             <table>
                 <thead>
                     <tr>
-                        <th>Foood/Drink Names</th>
+                        <th>Food/Drink Names</th>
                         <th>Calories</th>
                         <th>Carbs</th>
                         <th>Sugar</th>
