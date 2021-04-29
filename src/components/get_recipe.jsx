@@ -52,6 +52,7 @@ function GetRecipes(props) {
                         <tr>
                             <th>Recipe Name</th>
                             <th>Date Created</th>
+                            <th>Date Modified</th>
                             <th>Show</th>
                             <th>Delete</th>
                         </tr>
@@ -61,6 +62,7 @@ function GetRecipes(props) {
                             <tr key={item.recipeId}>
                                 <td>{item.recipeName}</td>
                                 <td>{item.dateCreated}</td> 
+                                <td>{item.dateModified}</td>
                                 <td><ShowRecipeButton recipeId={item.recipeId} /></td>
                                 <td><DeleteRecipes recipeId={item.recipeId} /></td>
                             </tr>

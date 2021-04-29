@@ -206,12 +206,13 @@ def get_recipe_name(recipe_name):
 
     recipe_results = []
     for result in query_results:
-        recipeId, recipeName, userId, dateCreated = result
+        recipeId, recipeName, userId, dateCreated, dateModified = result
         recipe_results.append({
             "recipeId": recipeId,
             "recipeName": recipeName,
             "userId": userId,
-            "dateCreated": dateCreated
+            "dateCreated": dateCreated,
+            'dateModified': dateModified
             })
 
     return recipe_results 
@@ -225,13 +226,14 @@ def get_recipe_id(recipe_id):
     query_results = conn.execute(query).fetchall()
     conn.close()
 
-    recipeId, recipeName, userId, dateCreated = query_results[0]
+    recipeId, recipeName, userId, dateCreated, dateModified = query_results[0]
 
     result = {
         'recipeId': recipeId,
         'recipeName': recipeName,
         'userId': userId,
-        'dateCreated': dateCreated
+        'dateCreated': dateCreated,
+        'dateModified': dateModified
     }
 
     return result
@@ -246,12 +248,13 @@ def get_recipe_by_user_id(user_id):
     results = []
     
     for result in query_results:
-        recipeId, recipeName, userId, dateCreated = result
+        recipeId, recipeName, userId, dateCreated, dateModified = result
         results.append({
             'recipeId': recipeId,
             'recipeName': recipeName,
             'userId': userId,
-            'dateCreated': dateCreated
+            'dateCreated': dateCreated,
+            'dateModified': dateModified
         })
     
     return results
@@ -344,12 +347,13 @@ def show_recipe():
     recipe_results = []
 
     for result in query_results:
-        recipeId, recipeName, userId, dateCreated = result
+        recipeId, recipeName, userId, dateCreated, dateModified = result
         recipe_results.append({
             "recipeId" : recipeId,
             "recipeName" : recipeName,
             "userId" : userId,
-            "dateCreated" : dateCreated
+            "dateCreated" : dateCreated,
+            'dateModified': dateModified
         })
 
     return recipe_results
