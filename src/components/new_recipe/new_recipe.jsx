@@ -125,14 +125,20 @@ function NewRecipe() {
                 <div className="col"><GetFood handleAddFood={handleAddFood} /></div>
                 <div className="col"><NewRecipeFoodList newFood={newestFoodAddition}  /></div>
             </div>
-            <div><GetDrink handleAddDrink={handleAddDrink} /></div>
-            <div><NewRecipeDrinkList newDrink={newestDrinkAddition} /></div>
 
-            <div><GetTool handleAddTool={handleAddTool} /></div>
-            <div><NewRecipeToolList newTool={newestToolsAddition} /></div>
             <div className="row">
-                <div className="col-sm"><button className="btn btn-primary" onClick={handleNewFood}>Create New Food</button></div>
-                <div className="col-sm"><button className="btn btn-primary" onClick={handleNewDrink}>Create New Drink</button></div>
+                <div className="col"><GetDrink handleAddDrink={handleAddDrink} /></div>
+                <div className="col"><NewRecipeDrinkList newDrink={newestDrinkAddition} /></div>
+            </div>
+
+            <div className="row">
+                <div className="col"><GetTool handleAddTool={handleAddTool} /></div>
+                <div className="col"><NewRecipeToolList newTool={newestToolsAddition} /></div>
+            </div>
+
+            <div className="row">
+                <div ><button className="btn btn-primary" onClick={handleNewFood}>Create New Food</button></div>
+                <div ><button className="btn btn-primary" onClick={handleNewDrink}>Create New Drink</button></div>
             </div>
         </div>
     );

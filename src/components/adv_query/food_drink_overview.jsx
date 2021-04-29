@@ -31,7 +31,7 @@ function FoodDrinkOverview() {
     }
 
     return (
-        <div>
+        <div className="container-fluid">
             <h2>This is a overview page</h2>
             <form onSubmit={handleSubmit}>
                 <label>

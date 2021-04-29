@@ -5,7 +5,7 @@ import AdvFoodQuery from "./adv_query/adv_food_query"
 
 function NewFoodPage() {
     return (
-        <div>
+        <div className="container-fluid">
             <NewFood />
             <br />
             <GetFood />

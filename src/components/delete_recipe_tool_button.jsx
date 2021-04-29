@@ -20,7 +20,7 @@ function DeleteRecipeToolButton(props) {
 
     return (
         <div>
-            <button onClick={handleClick}>Delete Food</button>
+            <button className="btn btn-danger" onClick={handleClick}>Delete Food</button>
         </div>
     )
 }
