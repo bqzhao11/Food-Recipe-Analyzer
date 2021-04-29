@@ -36,9 +36,9 @@ function NewRecipeFoodList (props) {
         <div>
             <h3>Added Foods:</h3>
             
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr className="table-primary">
                         <th>Food Name</th>
                         <th>Calories</th>
                         <th>Fat</th>

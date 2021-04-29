@@ -51,12 +51,12 @@ function GetDrink(props) {
                                               value={limit}
                                               onChange={e => setLimit(e.target.value)} />
                 </label><br />
-                <input type='submit' value='Find Drink' />
+                <input type='submit' className="btn btn-success" value='Find Drink' />
             </form>
 
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr className="table-success">
                         <th>Drink Name</th>
                         <th>Calories</th>
                         <th>Fat</th>

@@ -47,12 +47,12 @@ function GetTool (props) {
                                       value={toolName}
                                       onChange={e => setToolName(e.target.value)} />
                 </label><br />
-                <input type='submit' value='Find Tool' />
+                <input type='submit' className="btn btn-warning" value='Find Tool' />
             </form>
 
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr className="table-warning">
                         <th>Tool Name</th>
                         <th>Delete</th>
                         <th>Update</th>

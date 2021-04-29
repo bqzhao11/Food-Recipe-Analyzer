@@ -47,7 +47,7 @@ function GetRecipes(props) {
             </label>
             <input type='submit' value='Find Recipe' />
             </form>
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
                         <tr>
                             <th>Recipe Name</th>

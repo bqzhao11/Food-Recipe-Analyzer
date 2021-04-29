@@ -33,9 +33,9 @@ function NewRecipeDrinkList (props) {
         <div>
             <h3>Added Drinks:</h3>
             
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr className="table-success">
                         <th>Drink Name</th>
                         <th>Calories</th>
                         <th>Fat</th>

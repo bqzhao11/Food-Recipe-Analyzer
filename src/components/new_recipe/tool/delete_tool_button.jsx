@@ -15,7 +15,7 @@ function DeleteToolButton (props) {
 
     return (
         <div>
-            <button type="button" value="Delete" onClick={handleClick} >Delete Tool</button>
+            <button type="button" className="btn btn-danger btn-sm" value="Delete" onClick={handleClick} >Delete Tool</button>
         </div>
     )
 }

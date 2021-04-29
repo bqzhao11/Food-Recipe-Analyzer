@@ -10,7 +10,7 @@ function AddDrinkButton (props) {
 
     return (
         <div>
-            <button onClick={handleClick}>Add Drink</button>
+            <button className="btn btn-success btn-sm" onClick={handleClick}>Add Drink</button>
         </div>
     )
 }

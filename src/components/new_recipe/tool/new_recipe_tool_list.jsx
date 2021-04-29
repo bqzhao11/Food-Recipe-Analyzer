@@ -26,9 +26,9 @@ function NewRecipeToolList (props) {
         <div>
             <h3>Added Tools:</h3>
             
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr className="table-warning">
                         <th>Tool Name</th>
                     </tr>
                 </thead>
