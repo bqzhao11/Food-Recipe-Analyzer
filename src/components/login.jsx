@@ -22,7 +22,7 @@ function Login() {
 
 
     return(
-        <div>
+        <div className="container-fluid">
             <h2>This is the Login Page</h2>
             <label>
                 Username: <input type='text' value={username} onChange={e => setUsername(e.target.value)} />

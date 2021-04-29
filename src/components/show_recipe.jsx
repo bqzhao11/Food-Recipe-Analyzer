@@ -97,15 +97,15 @@ function ShowRecipe (props) {
 
 
     return (
-        <div>
-            <h2>{recipeName}</h2>
-            <h3>Date Created: {dateCreated}</h3>
-            <h3>Date Modified: {dateModified}</h3>
-            <h4>Total Calories: {totalCals}</h4>
-            <h4>Total Fat: {totalFat}</h4>
-            <h4>Total Protein: {totalProtein}</h4>
-            <h4>Total Carbs: {totalCarbs}</h4>
-            <h4>Total Sugar: {totalSugar}</h4>
+        <div className="container-fluid">
+            <h1>{recipeName}</h1>
+            <h4>Date Created: {dateCreated}</h4>
+            <h4>Date Modified: {dateModified}</h4>
+            <h5>Total Calories: {totalCals}</h5>
+            <h5>Total Fat: {totalFat}</h5>
+            <h5>Total Protein: {totalProtein}</h5>
+            <h5>Total Carbs: {totalCarbs}</h5>
+            <h5>Total Sugar: {totalSugar}</h5>
             <table className="table table-hover table-sm">
                 <thead>
                     <tr className="table-primary">

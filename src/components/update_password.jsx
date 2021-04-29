@@ -40,7 +40,7 @@ function UpdatePassword() {
     }
 
     return(
-        <div>
+        <div className="container-fluid">
             <h2>This is the update password page</h2>
             <form onSubmit={handleSubmit}>
                 <label>

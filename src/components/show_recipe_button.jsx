@@ -11,7 +11,7 @@ function ShowRecipeButton (props) {
 
     return (
         <div>
-            {clicked ? <Redirect push to={`/show-recipe/${props.recipeId}`} /> : <button onClick={handleClick} >Show Recipe</button>}
+            {clicked ? <Redirect push to={`/show-recipe/${props.recipeId}`} /> : <button className="btn btn-primary" onClick={handleClick} >Show Recipe</button>}
         </div>
     )
 }

@@ -42,7 +42,7 @@ function NewDrinks() {
     }
 
     return(
-        <div>
+        <div className="container-fluid">
             <h2>All information Regarding Beverages</h2>
             <form onSubmit={handleSubmit}>
                 <label>

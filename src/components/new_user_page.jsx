@@ -5,7 +5,7 @@ import GetUser from "./get_user";
 
 function NewUserPage() {
     return (
-        <div>
+        <div className="container-fluid">
             <NewUser />
             <br />
             <GetUser />

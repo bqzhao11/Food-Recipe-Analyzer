@@ -28,7 +28,7 @@ function Dashboard() {
     }
 
     return(
-        <div>
+        <div className="container-fluid">
             <LogoutButton firstName={firstName} lastName={lastName} />
             <div>
                 <GetRecipes userId={auth.user} />

@@ -35,7 +35,7 @@ function UpdateRecipe(props) {
                                       onChange={e => setRecipeName(e.target.value)} 
                                       placeholder="Recipe Name" />
                 </label>
-                <input type="submit" value="Update" />
+                <input className="btn btn-primary " type="submit" value="Update" />
             </form>
         </div>
     )

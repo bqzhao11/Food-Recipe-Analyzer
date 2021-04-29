@@ -15,7 +15,7 @@ function DeleteRecipes(props) {
 
     return (
         <div>
-            <button type="button" value="Delete" onClick={handleDelete} >Delete Recipe</button>
+            <button className="btn btn-danger" type="button" value="Delete" onClick={handleDelete} >Delete Recipe</button>
         </div>
     );
 }
