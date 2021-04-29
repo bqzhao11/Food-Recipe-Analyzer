@@ -11,6 +11,7 @@ function ShowRecipe (props) {
 
     const [recipeName, setRecipeName] = useState()
     const [dateCreated, setDateCreated] = useState()
+    const [dateModified, setDateModified] = useState()
     const [foods, setFoods] = useState([])
     const [drinks, setDrinks] = useState([])
     const [tools, setTools] = useState([])
@@ -28,6 +29,7 @@ function ShowRecipe (props) {
                  .then(res => {
                     setRecipeName(res.data.response.recipeName)
                     setDateCreated(res.data.response.dateCreated)
+                    setDateModified(res.data.response.dateModified)
                  })
                  .catch(err => {
                      console.log(err)
@@ -61,7 +63,7 @@ function ShowRecipe (props) {
                      console.log(err)
                  })
         }
-    }, [recipeId])
+    }, [recipeId, dateModified])
 
     useEffect(() => {
         var cal_sum = 0
@@ -98,6 +100,7 @@ function ShowRecipe (props) {
         <div>
             <h2>{recipeName}</h2>
             <h3>Date Created: {dateCreated}</h3>
+            <h3>Date Modified: {dateModified}</h3>
             <h4>Total Calories: {totalCals}</h4>
             <h4>Total Fat: {totalFat}</h4>
             <h4>Total Protein: {totalProtein}</h4>
