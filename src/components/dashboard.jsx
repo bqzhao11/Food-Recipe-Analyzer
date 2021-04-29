@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import GetRecipes from "./get_recipe";
 import RunAdv from "./adv_query/adv_sql_alex"
 import LogoutButton from "./logout_button";
+import RunProcedure from "./adv_query/procedure"
 import { useAuth } from "./auth";
 import axios from "axios";
 import { useHistory } from "react-router";
-
 
 function Dashboard() {
     let auth = useAuth();
@@ -36,6 +36,9 @@ function Dashboard() {
             <button onClick={handleNewRecipeClick}>New Recipe</button>
             <div>
                 <RunAdv />
+            </div>
+            <div>
+                <RunProcedure />
             </div>
         </div>
     );

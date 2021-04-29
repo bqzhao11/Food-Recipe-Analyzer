@@ -731,15 +731,14 @@ def update_tool_id(tool_id):
 
     return jsonify(result)
 
-@app.route('/tools/delete/<int:tool_id>', methods=['POST'])
-def delete_tool_id(tool_id):
+@app.route('/procedure', methods=['GET'])
+def callProcedure():
     try:
-        db_helper.delete_tool_id(tool_id)
+        return_table = db_helper.callProcedure()
         result = {
             'success': True,
-            'response': f'Deleted {tool_id} successfully'
+            'response': return_table
         }
-    
     except Exception as e:
         print(e)
         result = {

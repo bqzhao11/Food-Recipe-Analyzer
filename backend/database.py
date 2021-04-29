@@ -692,3 +692,21 @@ def update_tool_id(tool_id, tool_data):
     conn.close()
 
 
+def callProcedure():
+    query = f"call makeTable() "
+    
+    conn = db.connect()
+    query_results = conn.execute(query).fetchall()
+    conn.close()
+
+    return_table = []
+    for result in query_results:
+        foodName, caloires, sugar, Fat, review = result
+        return_table.append({
+            "foodName": foodName,
+            "caloires": caloires,
+            "sugar": sugar,
+            "Fat": Fat,
+            "review": review
+        })
+    return return_table
