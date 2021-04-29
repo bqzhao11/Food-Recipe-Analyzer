@@ -394,22 +394,6 @@ def delete_recipe(recipe_id):
     
     return jsonify(result)
 
-@app.route('/recipe/search_recipe/<string:recipe_name>', methods=['GET'])
-def search_recipe(recipe_name):
-    try:
-        recupe_returns = db_helper.search_recipe(recipe_name)
-        result = {
-            'success': True,
-            'response': recupe_returns
-        }
-    except Exception as e:
-        print(e)
-        result = {
-            'success': False,
-            'response': 'Something went wrong'
-        }
-    
-    return jsonify(result)
 
 @app.route('/recipe/search_healthy', methods=['GET'])
 def search_healthy():
