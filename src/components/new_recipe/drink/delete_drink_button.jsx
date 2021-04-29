@@ -15,7 +15,7 @@ function DeleteDrinkButton(p) {
 
     return (
         <div>
-            <button type="button" value="Delete" onClick={handleClick} >Delete Drink</button>
+            <button className="btn btn-danger btn-sm" type="button" value="Delete" onClick={handleClick} >Delete Drink</button>
         </div>
     );
 }

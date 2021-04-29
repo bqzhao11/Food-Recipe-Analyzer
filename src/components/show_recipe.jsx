@@ -106,9 +106,9 @@ function ShowRecipe (props) {
             <h4>Total Protein: {totalProtein}</h4>
             <h4>Total Carbs: {totalCarbs}</h4>
             <h4>Total Sugar: {totalSugar}</h4>
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr className="table-primary">
                         <th>Food Name</th>
                         <th>Calories</th>
                         <th>Fat</th>
@@ -140,9 +140,9 @@ function ShowRecipe (props) {
             </table>
 
 
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr className="table-success">
                         <th>Drink Name</th>
                         <th>Calories</th>
                         <th>Fat</th>
@@ -171,9 +171,9 @@ function ShowRecipe (props) {
                 </tbody>
             </table>
 
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr className="table-warning">
                         <th>Tool Name</th>
                         <th>Delete</th>
                     </tr>

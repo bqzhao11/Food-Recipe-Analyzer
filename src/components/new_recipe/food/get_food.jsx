@@ -50,11 +50,11 @@ function GetFood(props) {
                                               value={limit}
                                               onChange={e => setLimit(e.target.value)} />
                 </label><br />
-                <input type='submit' value='Find Food' />
+                <input type='submit' className="btn btn-primary" value='Find Food' />
             </form>
-            <table>
+            <table className="table table-hover table-sm">
                 <thead>
-                    <tr>
+                    <tr className="table-primary">
                         <th>Food Name</th>
                         <th>Calories</th>
                         <th>Fat</th>

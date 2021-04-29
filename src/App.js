@@ -11,6 +11,7 @@ import FoodDrinkOverview from "./components/adv_query/food_drink_overview";
 import './App.css';
 import ShowRecipe from "./components/show_recipe";
 import { PrivateRoute, ProvideAuth } from "./components/auth";
+import "bootstrap/dist/css/bootstrap.min.css"
 
 function App() {
     return (

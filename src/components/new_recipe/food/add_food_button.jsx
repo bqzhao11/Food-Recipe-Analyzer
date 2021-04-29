@@ -26,7 +26,7 @@ function AddFoodButton (props) {
                     )
                 }}
             >
-                <button>Add Food</button>
+                <button className="btn btn-success btn-sm">Add Food</button>
             </Popover>
             
     )

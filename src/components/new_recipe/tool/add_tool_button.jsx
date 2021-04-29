@@ -10,7 +10,7 @@ function AddToolButton (props) {
 
     return (
         <div>
-            <button onClick={handleClick}>Add Tool</button>
+            <button  className="btn btn-success btn-sm" onClick={handleClick}>Add Tool</button>
         </div>
     )
 }

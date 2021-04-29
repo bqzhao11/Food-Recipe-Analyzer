@@ -8,7 +8,7 @@ function UpdateToolButton (props) {
     }
     return (
         <div>
-            <button type="button" value="Update" onClick={handleClick} >Update Tool</button>
+            <button type="button" className="btn btn-warning btn-sm" value="Update" onClick={handleClick} >Update Tool</button>
         </div>
     )
 }

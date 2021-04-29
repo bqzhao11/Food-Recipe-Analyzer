@@ -103,7 +103,7 @@ function NewRecipe() {
 
 
     return (
-        <div>
+        <div className="container-fluid">
             <h2>New Recipe:</h2>
             <form onSubmit={handleSubmit}>
                 <input
@@ -121,17 +121,19 @@ function NewRecipe() {
                 style={{ flex: "1" }}
                 />
             </form>
-            <div><GetFood handleAddFood={handleAddFood} /></div>
-            <div><NewRecipeFoodList newFood={newestFoodAddition}  /></div>
-
+            <div className="row">
+                <div className="col"><GetFood handleAddFood={handleAddFood} /></div>
+                <div className="col"><NewRecipeFoodList newFood={newestFoodAddition}  /></div>
+            </div>
             <div><GetDrink handleAddDrink={handleAddDrink} /></div>
             <div><NewRecipeDrinkList newDrink={newestDrinkAddition} /></div>
 
             <div><GetTool handleAddTool={handleAddTool} /></div>
             <div><NewRecipeToolList newTool={newestToolsAddition} /></div>
-            <div><button onClick={handleNewFood}>Create New Food</button></div>
-            <div><button onClick={handleNewDrink}>Create New Drink</button></div>
-            
+            <div className="row">
+                <div className="col-sm"><button className="btn btn-primary" onClick={handleNewFood}>Create New Food</button></div>
+                <div className="col-sm"><button className="btn btn-primary" onClick={handleNewDrink}>Create New Drink</button></div>
+            </div>
         </div>
     );
 }
