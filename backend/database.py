@@ -701,12 +701,11 @@ def callProcedure():
 
     return_table = []
     for result in query_results:
-        foodName, caloires, sugar, Fat, review = result
+        foodName, calories, sugars,fat, review = result
         return_table.append({
             "foodName": foodName,
-            "caloires": caloires,
-            "sugar": sugar,
-            "Fat": Fat,
+            "calories": calories,
+            "sugars": sugars,
             "review": review
         })
     return return_table
