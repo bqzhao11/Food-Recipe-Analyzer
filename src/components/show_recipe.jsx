@@ -30,8 +30,6 @@ function ShowRecipe (props) {
     // var names = ['totalCals', 'totalFat', 'totalProtein', 'totalCarbs', 'totalSugar']
     // var data = [totalCals, totalFat, totalProtein, totalCarbs, totalSugar]
 
-    
-
 
 
 
@@ -81,6 +79,8 @@ function ShowRecipe (props) {
     }, [recipeId, dateModified])
 
     useEffect(() => {
+        
+        var svg = d3.select("#ShowRecipe");
         var cal_sum = 0
         var fat_sum = 0
         var protein_sum = 0
@@ -113,9 +113,10 @@ function ShowRecipe (props) {
         var margin = {top:10, right:30, bottom:90, left:40},
         width = 460 - margin.left - margin.right,
         height = 450 - margin.top - margin.bottom;
+
+        svg.selectAll("*").remove();
         
-        var svg = d3.select("#ShowRecipe")
-        .append("svg")
+        svg = svg.append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height",height + margin.top + margin.bottom)
         .append("g")
@@ -123,7 +124,7 @@ function ShowRecipe (props) {
         "translate(" + margin.left + "," + margin.top + ")");
         
         var x = d3.scaleLinear()
-        .domain([0, 2000])
+        .domain([0, totalCals * 1.1])
         .range([ 0, width]);
         svg.append("g")
         .attr("transform", "translate(0," + height + ")")
