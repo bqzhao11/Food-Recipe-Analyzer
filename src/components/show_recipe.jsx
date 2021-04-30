@@ -5,6 +5,8 @@ import DeleteRecipeDrinkButton from "./delete_recipe_drink_button";
 import DeleteRecipeFoodButton from "./delete_recipe_food_button";
 import DeleteRecipeToolButton from "./delete_recipe_tool_button";
 import UpdateRecipe from "./update_recipe_page";
+import * as d3 from 'd3'
+
 
 
 function ShowRecipe (props) {
@@ -21,6 +23,18 @@ function ShowRecipe (props) {
     const [totalProtein, setTotalProtein] = useState()
     const [totalCarbs, setTotalCarbs] = useState()
     const [totalSugar, setTotalSugar] = useState()
+    const [data, setData] = useState([])
+
+    // var data = [{name: 'totalCals', val: totalCals}, {name: 'totalFat', val: totalFat}, {name: 'totalProtein', val: totalProtein}, {name: 'totalCarbs', val: totalCarbs}, {name: 'totalSugar', val: totalSugar}]
+
+    // var names = ['totalCals', 'totalFat', 'totalProtein', 'totalCarbs', 'totalSugar']
+    // var data = [totalCals, totalFat, totalProtein, totalCarbs, totalSugar]
+
+    
+
+
+
+
 
     useEffect(() => {
         if (recipeId) {
@@ -62,6 +76,7 @@ function ShowRecipe (props) {
                  .catch(err => {
                      console.log(err)
                  })
+
         }
     }, [recipeId, dateModified])
 
@@ -93,6 +108,49 @@ function ShowRecipe (props) {
         setTotalCarbs(carbs_sum)
         setTotalSugar(sugar_sum)
 
+        setData([{name: 'totalCals', val: totalCals}, {name: 'totalFat', val: totalFat}, {name: 'totalProtein', val: totalProtein}, {name: 'totalCarbs', val: totalCarbs}, {name: 'totalSugar', val: totalSugar}])
+
+        var margin = {top:10, right:30, bottom:90, left:40},
+        width = 460 - margin.left - margin.right,
+        height = 450 - margin.top - margin.bottom;
+        
+        var svg = d3.select("#ShowRecipe")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height",height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+        
+        var x = d3.scaleLinear()
+        .domain([0, 2000])
+        .range([ 0, width]);
+        svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+          .attr("transform", "translate(-10,0)rotate(-45)")
+          .style("text-anchor", "end");
+        
+        var y = d3.scaleBand()
+        .range([ 0, height ])
+        .domain(data.map(function(d) { return d.name}))
+        .padding(.1);
+        svg.append("g")
+        .call(d3.axisLeft(y))
+        
+        
+        svg.selectAll("myRect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", x(0) )
+        .attr("y", function(d) { return y(d.name); })
+        .attr("width", function(d) { return x(d.val); })
+        .attr("height", y.bandwidth() )
+        .attr("fill", "#69b3a2")
+    
+
     }, [foods, drinks])
 
 
@@ -106,6 +164,11 @@ function ShowRecipe (props) {
             <h5>Total Protein: {totalProtein}</h5>
             <h5>Total Carbs: {totalCarbs}</h5>
             <h5>Total Sugar: {totalSugar}</h5>
+
+            <script src="https://d3js.org/d3.v4.js"></script>
+
+            <div id="ShowRecipe"></div>
+
             <table className="table table-hover table-sm">
                 <thead>
                     <tr className="table-primary">
@@ -196,3 +259,10 @@ function ShowRecipe (props) {
 
 
 export default ShowRecipe;
+
+
+
+
+    
+
+
